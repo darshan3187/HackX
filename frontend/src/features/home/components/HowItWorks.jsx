@@ -12,14 +12,6 @@ const HowItWorks = () => {
       bg: 'bg-orange-50',
     },
     {
-      id: '02',
-      title: 'Automatic Assignment',
-      description: 'System assigns the issue to the relevant department based on category.',
-      icon: Target,
-      color: 'text-red-500',
-      bg: 'bg-red-50',
-    },
-    {
       id: '03',
       title: 'Track Progress',
       description: 'Monitor real-time updates as your issue moves towards resolution.',
