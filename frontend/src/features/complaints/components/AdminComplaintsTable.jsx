@@ -13,7 +13,7 @@ const statusConfig = {
 const AdminComplaintsTable = ({ complaints = [] }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Increased slightly for better density
+  const itemsPerPage = 5;
 
   const totalPages = Math.ceil(complaints.length / itemsPerPage) || 1;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -42,7 +42,6 @@ const AdminComplaintsTable = ({ complaints = [] }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
 
-      {/* Header */}
       <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-white">
         <div>
           <h2 className="text-lg font-bold text-slate-800">Recent Complaints</h2>
@@ -50,7 +49,6 @@ const AdminComplaintsTable = ({ complaints = [] }) => {
         </div>
       </div>
 
-      {/* Table Body */}
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -128,7 +126,6 @@ const AdminComplaintsTable = ({ complaints = [] }) => {
         </table>
       </div>
 
-      {/* Pagination */}
       <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/30 flex items-center justify-between">
         <span className="text-xs text-slate-500 font-medium">
           Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, complaints.length)} of {complaints.length}

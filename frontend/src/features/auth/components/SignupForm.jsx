@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import API from '../../../services/api';   // same axios instance used in login
+import API from '../../../services/api';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ const SignupForm = () => {
 
         <div className="space-y-5">
 
-          {/* Username */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
             <div className="relative">
@@ -68,7 +67,6 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <div className="relative">
@@ -85,7 +83,6 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <div className="relative">

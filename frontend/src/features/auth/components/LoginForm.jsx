@@ -19,7 +19,6 @@ const LoginForm = () => {
         password: password,
       });
 
-      // store tokens
       localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
       const decoded = jwtDecode(response.data.access);
@@ -49,11 +48,9 @@ const LoginForm = () => {
         </p>
       </div>
 
-      {/* FORM */}
       <form className="mt-8 space-y-6" onSubmit={handleLogin}>
         <div className="space-y-5">
 
-          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Username
@@ -70,7 +67,6 @@ const LoginForm = () => {
             </div>
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Password

@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import UserSidebar from '../features/dashboard/components/UserSidebar';
 import { Outlet } from 'react-router-dom';
-import { X } from 'lucide-react'; // Menu icon is now handled by Navbar
+import { X } from 'lucide-react';
 
 const UserLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,21 +11,15 @@ const UserLayout = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans text-gray-900">
 
-      {/* 1. Pass the toggle function to Navbar to trigger the drawer */}
       <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
 
       <div className="flex flex-1 w-full relative">
 
-        {/* 2. SIDEBAR DRAWER 
-            - Slides in from left on mobile
-            - Fixed column on desktop
-        */}
         <aside className={`
           fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:block lg:w-64 lg:h-[calc(100vh-64px)] lg:sticky lg:top-16 lg:z-30
           ${isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
         `}>
 
-          {/* Mobile Header for Sidebar - Allows closing via X icon */}
           <div className="p-4 flex items-center justify-between lg:hidden border-b border-gray-50">
             <span className="font-bold text-[#1E3A8A]">Menu</span>
             <button

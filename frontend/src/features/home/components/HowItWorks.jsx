@@ -41,7 +41,6 @@ const HowItWorks = () => {
     <div className="py-20 bg-gray-50" id="how-it-works">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             How CivicTrack Works
@@ -51,22 +50,18 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step) => (
             <div key={step.id} className="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               
-              {/* Step Number */}
               <span className="text-sm font-bold text-gray-400 block mb-4">
                 {step.id}
               </span>
 
-              {/* Icon */}
               <div className={`w-14 h-14 ${step.bg} rounded-xl flex items-center justify-center mb-6`}>
                 <step.icon className={`w-7 h-7 ${step.color}`} />
               </div>
 
-              {/* Content */}
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 {step.title}
               </h3>

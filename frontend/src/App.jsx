@@ -2,14 +2,12 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Layouts & Components
 import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
 import UserLayout from './layouts/UserLayout';
 import Loader from './components/feedback/Loader';
 import PrivateRoute from "./components/PrivateRoute";
 
-// Lazy Loaded Pages
 const Home = lazy(() => import('./pages/public/Home'));
 const Login = lazy(() => import('./pages/public/Login'));
 const Signup = lazy(() => import('./pages/public/Signup'));
@@ -21,7 +19,6 @@ const AdminLayout = lazy(() => import('./layouts/AdminLayout'));
 const Logout = lazy(() => import('./pages/public/Logout'));
 const AdminComplaintDetail = lazy(() => import('./pages/admin/ComplaintDetail'));
 
-// Public Layout (Navbar + Footer)
 const RootLayout = () => (
   <div className="flex flex-col min-h-screen">
     <Navbar />
@@ -47,14 +44,12 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
 
-          {/* PUBLIC ROUTES */}
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
           </Route>
 
-          {/* USER ROUTES */}
           <Route element={<PrivateRoute allowedRole="CITIZEN" />}>
             <Route path="/dashboard" element={<UserLayout />}>
               <Route index element={<Dashboard />} />
@@ -63,7 +58,6 @@ function App() {
             </Route>
           </Route>
 
-          {/* ADMIN ROUTES */}
           <Route element={<PrivateRoute allowedRole="AUTHORITY" />}>
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
@@ -71,7 +65,6 @@ function App() {
             </Route>
           </Route>
 
-          {/* STANDALONE ROUTES */}
           <Route path="/logout" element={<Logout />} />
 
         </Routes>

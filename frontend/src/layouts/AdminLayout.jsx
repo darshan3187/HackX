@@ -12,7 +12,6 @@ const AdminLayout = () => {
 
             <div className="flex flex-1 w-full relative">
 
-                {/* CLEAN SIDEBAR */}
                 <aside className={`
           fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:block lg:w-64 lg:h-[calc(100vh-64px)] lg:sticky lg:top-16 lg:z-30
           ${isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
@@ -29,14 +28,12 @@ const AdminLayout = () => {
                     <AdminSidebar closeMobileMenu={() => setIsSidebarOpen(false)} />
                 </aside>
 
-                {/* OVERLAY */}
                 <div
                     className={`fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                         }`}
                     onClick={() => setIsSidebarOpen(false)}
                 ></div>
 
-                {/* MAIN CONTENT Area */}
                 <main className="flex-1 min-w-0 p-4 md:p-8 overflow-x-hidden">
                     <div className="max-w-7xl mx-auto space-y-8">
                         <Outlet />

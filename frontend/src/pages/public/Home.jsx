@@ -10,7 +10,6 @@ const Home = () => {
       <HomeIntroSection />
       <KeyFeatures />
       <HowItWorks />
-      {/* <CTASection /> */}
     </div>
   );
 };

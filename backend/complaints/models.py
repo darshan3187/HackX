@@ -43,7 +43,6 @@ class Complaint(models.Model):
         default='PENDING'
     )
 
-    # Stores True if User Accepted, False if Rejected (Reopened), None if Pending
     user_confirmation = models.BooleanField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

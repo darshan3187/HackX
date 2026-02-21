@@ -7,13 +7,8 @@ class IsOwnerOrAdmin(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed to any request,
-        # so we'll always allow GET, HEAD or OPTIONS requests.
-        # But wait, the spec says "Users cannot access others' complaints"
-        # So we should block read if not owner or admin.
 
         if request.user.is_staff:
             return True
 
-        # Instance must have an attribute named `user`.
         return obj.user == request.user

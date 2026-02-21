@@ -4,12 +4,11 @@ import { Menu, X, MapPin, Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const Navbar = ({ onMenuClick }) => { // Added onMenuClick prop to trigger sidebar
+const Navbar = ({ onMenuClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
   const location = useLocation();
 
-  // CHECK: Are we on a dashboard page?
   const isDashboard = location.pathname.startsWith('/dashboard');
 
   useEffect(() => {
@@ -32,7 +31,6 @@ const Navbar = ({ onMenuClick }) => { // Added onMenuClick prop to trigger sideb
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
 
-          {/* LEFT: LOGO */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
               <div className="w-8 h-8 bg-[#0F5C86] rounded-full flex items-center justify-center">
@@ -42,12 +40,10 @@ const Navbar = ({ onMenuClick }) => { // Added onMenuClick prop to trigger sideb
             </Link>
           </div>
 
-          {/* RIGHT: DESKTOP MENU */}
           <div className="hidden md:flex items-center space-x-8">
 
             {isDashboard ? (
               <div className="flex items-center gap-6">
-                {/* User Profile */}
                 <div className="flex items-center gap-3 pl-6 border-l border-gray-100">
                   <div className="text-right">
                     <p className="text-sm font-bold text-gray-900/80 leading-none capitalize">{ user?.username }</p>
@@ -71,10 +67,9 @@ const Navbar = ({ onMenuClick }) => { // Added onMenuClick prop to trigger sideb
 
           </div>
 
-          {/* MOBILE MENU BUTTON */}
           <div className="flex items-center md:hidden">
             <button
-              onClick={isDashboard ? onMenuClick : () => setIsOpen(!isOpen)} // If in dashboard, open sidebar drawer. Otherwise, open standard menu.
+              onClick={isDashboard ? onMenuClick : () => setIsOpen(!isOpen)}
               className="text-gray-500 hover:text-gray-700 focus:outline-none"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -83,7 +78,6 @@ const Navbar = ({ onMenuClick }) => { // Added onMenuClick prop to trigger sideb
         </div>
       </div>
 
-      {/* MOBILE MENU DROPDOWN (For Public Pages only) */}
       {isOpen && !isDashboard && (
         <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
           <div className="px-4 pt-2 pb-4 space-y-2">

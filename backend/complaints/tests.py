@@ -10,7 +10,6 @@ class ComplaintAPITest(APITestCase):
     def setUp(self):
         User = get_user_model()
 
-        # Create users
         self.user1 = User.objects.create_user(
             username='userA',
             password='darshan3187'
@@ -27,7 +26,6 @@ class ComplaintAPITest(APITestCase):
             is_staff=True
         )
 
-        # Login user1
         response = self.client.post(reverse('token_obtain_pair'), {
             "username": "userA",
             "password": "darshan3187"
@@ -40,7 +38,6 @@ class ComplaintAPITest(APITestCase):
         })
         self.user2_token = response.data['access']
 
-        # Login admin
         response = self.client.post(reverse('token_obtain_pair'), {
             "username": "admin",
             "password": "darshan3187"
@@ -81,7 +78,6 @@ class ComplaintAPITest(APITestCase):
             user=self.user1
         )
 
-        # login as user2
         response = self.client.post(reverse('token_obtain_pair'), {
             "username": "userB",
             "password": "darshan3187"

@@ -38,13 +38,11 @@ const ComplaintsTable = () => {
   return (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
 
-      {/* Header */}
       <div className="p-8 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>
           <h2 className="text-xl font-bold text-gray-900">Recent Complaints</h2>
           <p className="text-gray-500 text-sm mt-1">Latest civic issues reported by citizens</p>
         </div>
-        {/* Updated to use navigate for the report button too */}
         <button
           onClick={() => navigate('/dashboard/report')}
           className="hover:cursor-pointer  px-6 py-2.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-full hover:bg-gray-50 transition-colors shadow-sm"
@@ -53,7 +51,6 @@ const ComplaintsTable = () => {
         </button>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50/50">

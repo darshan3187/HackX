@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-// Link import removed for now since we aren't using routing here yet
 
 const CTASection = () => {
   return (
@@ -8,7 +7,6 @@ const CTASection = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#1E3A8A] rounded-3xl shadow-xl overflow-hidden relative">
           
-          {/* Background Pattern */}
           <div className="absolute top-0 left-0 w-full h-full opacity-10">
             <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
               <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
@@ -24,7 +22,6 @@ const CTASection = () => {
             </p>
             <div className="mt-8 flex justify-center">
               <div className="inline-flex rounded-md shadow">
-                {/* Reverted to <a> with href="#" until the Report Form page is ready */}
                 <a
                   href="#"
                   className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#1E3A8A] bg-white hover:bg-blue-50 transition-colors"

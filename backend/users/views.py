@@ -13,14 +13,12 @@ class CustomTokenView(TokenObtainPairView):
     serializer_class = CustomTokenSerializer
 
 
-# Register (Anyone can register as CITIZEN)
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
 
 
-# Get Logged-in User Profile
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -29,7 +27,6 @@ class ProfileView(APIView):
         return Response(serializer.data)
 
 
-# Admin-only: List All Users
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

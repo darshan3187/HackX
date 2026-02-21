@@ -88,7 +88,7 @@ const AdminComplaintView = () => {
         { key: "PENDING", label: "Submitted & Pending", date: complaint.created_at },
         { key: "IN_PROGRESS", label: "Processing", date: null },
         { key: "RESOLVED_BY_AUTHORITY", label: "Resolution Provided", date: null },
-        { key: "CLOSED", label: "Closed & Verified", date: null } // Simplified for view
+        { key: "CLOSED", label: "Closed & Verified", date: null }
     ];
 
     const currentStatusConfig = statusOptions.find(s => s.value === complaint.status) || {
@@ -99,7 +99,6 @@ const AdminComplaintView = () => {
     return (
         <div className="max-w-7xl mx-auto space-y-6 pb-12">
 
-            {/* Header / Nav */}
             <div className="flex items-center gap-4">
                 <Link to="/admin" className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500 hover:text-slate-900">
                     <ArrowLeft className="w-5 h-5" />
@@ -113,7 +112,6 @@ const AdminComplaintView = () => {
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    {/* Placeholder for extra actions */}
                     <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg">
                         <MoreHorizontal className="w-5 h-5" />
                     </button>
@@ -122,13 +120,10 @@ const AdminComplaintView = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                {/* LEFT MAIN CONTENT */}
                 <div className="lg:col-span-2 space-y-8">
 
-                    {/* Main Details Card */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-                        {/* Title Section */}
                         <div className="p-8 border-b border-slate-100">
                             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Subject</span>
                             <h2 className="text-2xl font-bold text-slate-900 leading-tight">
@@ -136,7 +131,6 @@ const AdminComplaintView = () => {
                             </h2>
                         </div>
 
-                        {/* Description */}
                         <div className="p-8">
                             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Description</span>
                             <p className="text-slate-600 leading-relaxed text-base">
@@ -144,7 +138,6 @@ const AdminComplaintView = () => {
                             </p>
 
 
-                            {/* Image Attachment */}
                             {complaint.image && (
                                 <div className="mt-8">
                                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Attachment</span>
@@ -164,7 +157,6 @@ const AdminComplaintView = () => {
                         </div>
                     </div>
 
-                    {/* Feedback/Comments Section - Placeholder for now */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 opacity-50 pointer-events-none grayscale">
                         <div className="flex items-center gap-3 mb-6">
                             <MessageSquare className="w-5 h-5 text-slate-400" />
@@ -175,10 +167,8 @@ const AdminComplaintView = () => {
 
                 </div>
 
-                {/* RIGHT SIDEBAR */}
                 <div className="space-y-6">
 
-                    {/* Status Action Card */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                         <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wide">Update Status</h3>
 
@@ -228,7 +218,6 @@ const AdminComplaintView = () => {
                         </div>
                     </div>
 
-                    {/* Metadata Card */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
                         <h3 className="text-sm font-bold text-slate-900 mb-2 uppercase tracking-wide">Details</h3>
 
@@ -269,14 +258,11 @@ const AdminComplaintView = () => {
                         </div>
                     </div>
 
-                    {/* Timeline */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 overflow-hidden">
                         <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wide">Progress Timeline</h3>
 
                         <div className="relative pl-2 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
                             {timelineSteps.map((step, idx) => {
-                                // Determine active state based on simplified logic for visual only
-                                // Real logic would need more careful mapping if flow isn't linear
                                 const isActive = idx <= (
                                     complaint.status === 'CLOSED' ? 3 :
                                         complaint.status === 'RESOLVED_BY_AUTHORITY' ? 2 :

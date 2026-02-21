@@ -6,10 +6,8 @@ const Spline = lazy(() => import('@splinetool/react-spline'));
 const HomeIntroSection = () => {
 
   return (
-    // FIX 1: Changed background to a gradient that goes to PURE WHITE at the bottom
     <div className="relative bg-gradient-to-b from-slate-50 via-slate-50 to-white overflow-hidden min-h-screen flex flex-col lg:block">
       
-      {/* Background Decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-white opacity-40 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-100 blur-[120px] opacity-50"></div>
       </div>
@@ -50,8 +48,6 @@ const HomeIntroSection = () => {
                 </div>
               </div>
 
-              {/* Metrics */}
-              {/* FIX 2: Removed border-t and added extra padding bottom to breathe */}
               <div className="mt-12 grid grid-cols-3 gap-6 pt-8 relative z-20 pr-4 pb-12">
                 <div className="flex flex-col">
                   <div className="flex items-center text-3xl font-bold text-slate-900">

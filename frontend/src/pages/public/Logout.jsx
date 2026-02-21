@@ -6,12 +6,10 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear authentication data
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('role');
 
-    // clear everything
     localStorage.clear();
 
     const timer = setTimeout(() => {

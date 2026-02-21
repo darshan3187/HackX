@@ -6,14 +6,12 @@ const Loader = () => {
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#f8fafc]/80 backdrop-blur-sm">
             <div className="flex flex-col items-center gap-6">
                 <div className="relative">
-                    {/* Animated Outer Ring */}
                     <motion.div
                         animate={{ rotate: 360, scale: [1, 1.1, 1] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         className="w-20 h-20 border-[3px] border-slate-200 border-t-blue-600 rounded-full shadow-[0_0_30px_rgba(37,99,235,0.1)]"
                     />
 
-                    {/* Shield Pulse */}
                     <motion.div
                         animate={{
                             opacity: [0.3, 1, 0.3],

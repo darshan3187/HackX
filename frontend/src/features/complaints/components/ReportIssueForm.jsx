@@ -83,7 +83,6 @@ const ReportIssueForm = () => {
    return (
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 space-y-10">
 
-         {/* Header */}
          <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
                Report Civic Issue
@@ -93,12 +92,10 @@ const ReportIssueForm = () => {
             </p>
          </div>
 
-         {/* Form Container */}
          <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-sm overflow-hidden p-5 sm:p-8">
 
             <form onSubmit={handleSubmit} className="space-y-8">
 
-               {/* Photo Upload */}
                <div className="space-y-3">
                   <label className="block text-sm font-bold text-gray-900">
                      Issue Photo
@@ -134,7 +131,6 @@ const ReportIssueForm = () => {
 
                </div>
 
-               {/* Title */}
                <div className="space-y-2">
                   <label className="block text-sm font-bold text-gray-900">
                      Issue Title *
@@ -148,7 +144,6 @@ const ReportIssueForm = () => {
                   />
                </div>
 
-               {/* Category & Location */}
                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                      <label className="block text-sm font-bold text-gray-900">
@@ -248,7 +243,6 @@ const ReportIssueForm = () => {
                   </div>
                </div>
 
-               {/* Description */}
                <div className="space-y-2">
                   <label className="block text-sm font-bold text-gray-900">
                      Detailed Description *
@@ -262,7 +256,6 @@ const ReportIssueForm = () => {
                   />
                </div>
 
-               {/* Buttons */}
                <div className="pt-2 flex flex-col sm:flex-row gap-4">
                   <button
                      type="submit"
@@ -283,7 +276,6 @@ const ReportIssueForm = () => {
             </form>
          </div>
 
-         {/* Info Cards */}
          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <div className="bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-gray-100 shadow-sm">

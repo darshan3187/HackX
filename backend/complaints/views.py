@@ -20,11 +20,9 @@ class ComplaintViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
-        # If admin/staff → see all complaints
         if user.is_staff:
             return Complaint.objects.all()
 
-        # Normal user → see only their complaints
         return Complaint.objects.filter(user=user)
 
     def perform_create(self, serializer):
@@ -55,7 +53,6 @@ class ComplaintViewSet(viewsets.ModelViewSet):
     def edit_fields(self, request, pk=None):
         complaint = self.get_object()
 
-        # Prevent editing if complaint is not pending
         if complaint.status != "PENDING":
             return Response(
             {"error": "Only pending complaints can be edited."},
@@ -102,7 +99,6 @@ class ComplaintViewSet(viewsets.ModelViewSet):
                 status=400
             )
 
-        # Reset confirmation when authority resolves
         if new_status == 'RESOLVED_BY_AUTHORITY':
             complaint.user_confirmation = None
 
@@ -150,7 +146,6 @@ class ComplaintViewSet(viewsets.ModelViewSet):
                 status=400
             )
 
-        # Prevent duplicate feedback after reopen
         if complaint.feedbacks.exists():
             return Response(
                 {"error": "Feedback already submitted."},
@@ -167,8 +162,4 @@ class ComplaintViewSet(viewsets.ModelViewSet):
             return Response({"message": "Feedback submitted successfully."})
 
         return Response(serializer.errors, status=400)
-
-
-
-
 

@@ -26,7 +26,6 @@ const UserSidebar = ({ closeMobileMenu }) => {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      {/* MOBILE ONLY: User Profile Section */}
       <div className="p-4 border-b border-gray-100 block lg:hidden space-y-1">
         <div className="flex items-center gap-4 px-4 py-3">
           <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-[#1E3A8A] font-bold shadow-sm">
@@ -47,7 +46,6 @@ const UserSidebar = ({ closeMobileMenu }) => {
         </Link>
       </div>
 
-      {/* Navigation Links */}
       <nav className="flex-1 p-4 space-y-2 mt-2">
         {menuItems.map((item) => (
           <NavLink
@@ -68,7 +66,6 @@ const UserSidebar = ({ closeMobileMenu }) => {
         ))}
       </nav>
 
-      {/* Footer Section */}
       <div className="p-4 border-t border-gray-50 space-y-1">
         <Link
           to="/logout"

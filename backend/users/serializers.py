@@ -10,7 +10,6 @@ class CustomTokenSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom fields
         token['role'] = user.role
         token['username'] = user.username
 
