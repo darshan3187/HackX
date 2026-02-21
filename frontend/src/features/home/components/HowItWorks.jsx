@@ -12,7 +12,7 @@ const HowItWorks = () => {
       bg: 'bg-orange-50',
     },
     {
-      id: '03',
+      id: '02',
       title: 'Track Progress',
       description: 'Monitor real-time updates as your issue moves towards resolution.',
       icon: BarChart3,
@@ -20,7 +20,7 @@ const HowItWorks = () => {
       bg: 'bg-blue-50',
     },
     {
-      id: '04',
+      id: '03',
       title: 'Verify & Rate',
       description: 'Confirm resolution and provide feedback on the quality of service.',
       icon: Star,
