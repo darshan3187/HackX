@@ -2,7 +2,6 @@
 
 [![Frontend](https://img.shields.io/badge/frontend-React%2019%20%2B%20Vite-61DAFB?logo=react&logoColor=white)](frontend/package.json)
 [![Backend](https://img.shields.io/badge/backend-Django%20%2B%20DRF-092E20?logo=django&logoColor=white)](backend/requirement.txt)
-[![License](https://img.shields.io/badge/license-Not%20specified-lightgrey)](#license)
 
 Civic Tracker is a full-stack civic grievance platform where citizens can report local issues and authorities can review, track, and resolve them through a role-based workflow.
 
