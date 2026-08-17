@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../../../services/api';
+import Button from '../../../components/ui/Button';
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const [formData, setFormData] = useState({
     username: '',
@@ -22,101 +25,112 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg('');
 
     try {
       await API.post('api/users/register/', formData);
       navigate('/login');
     } catch (error) {
       console.log(error.response?.data);
-      alert("Registration failed");
+      setErrorMsg(error.response?.data?.username?.[0] || error.response?.data?.detail || "Registration failed. Please check your details.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md space-y-8">
-
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+    <div className="w-full space-y-6 font-sans">
+      <div className="space-y-2">
+        <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
           Create an account
         </h2>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="text-sm text-gray-500 font-medium">
           Already have an account?{' '}
-          <Link to="/login" className="font-medium text-[#1E3A8A] hover:text-blue-800 transition-colors">
-            log in here
+          <Link to="/login" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
+            Sign in here
           </Link>
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+      {errorMsg && (
+        <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+          {errorMsg}
+        </div>
+      )}
 
-        <div className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-4">
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <label className="block text-xs font-bold text-gray-700 tracking-wide mb-1.5">Username</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <User className="h-5 w-5 text-gray-400" />
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <User className="h-4 w-4" />
               </div>
               <input
                 name="username"
                 type="text"
                 required
+                placeholder="Choose a username"
                 onChange={handleChange}
-                className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl"
+                className="w-full bg-white border border-gray-200 rounded-xl text-sm text-gray-900 font-medium placeholder-gray-400 pl-10 pr-4 py-3 transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-xs font-bold text-gray-700 tracking-wide mb-1.5">Email Address</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <Mail className="h-4 w-4" />
               </div>
               <input
                 name="email"
                 type="email"
                 required
+                placeholder="name@example.com"
                 onChange={handleChange}
-                className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl"
+                className="w-full bg-white border border-gray-200 rounded-xl text-sm text-gray-900 font-medium placeholder-gray-400 pl-10 pr-4 py-3 transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-xs font-bold text-gray-700 tracking-wide mb-1.5">Password</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-gray-400" />
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <Lock className="h-4 w-4" />
               </div>
               <input
                 name="password"
                 type={showPassword ? "text" : "password"}
                 required
                 minLength={8}
+                placeholder="Minimum 8 characters"
                 onChange={handleChange}
-                className="block w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl"
+                className="w-full bg-white border border-gray-200 rounded-xl text-sm text-gray-900 font-medium placeholder-gray-400 pl-10 pr-10 py-3 transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
               >
-                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
 
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="hover:cursor-pointer w-full flex justify-center items-center py-3.5 px-4 rounded-xl text-white bg-[#1E3A8A]"
+          isLoading={isLoading}
+          className="w-full py-3.5 text-sm"
+          icon={ArrowRight}
         >
-          Create Account
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </button>
-
+          Get Started Free
+        </Button>
       </form>
     </div>
   );

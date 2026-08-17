@@ -1,8 +1,8 @@
 import React from "react";
-import { FileText, Clock, Activity, CheckCircle } from "lucide-react";
+import { FileText, Clock, TrendingUp, CheckCircle2 } from "lucide-react";
+import Card from "../../../components/ui/Card";
 
 const AdminStatsCards = ({ complaints = [] }) => {
-
   const stats = [
     {
       label: "Total Complaints",
@@ -10,51 +10,50 @@ const AdminStatsCards = ({ complaints = [] }) => {
       icon: FileText,
       color: "text-blue-600",
       bg: "bg-blue-50",
-      border: "border-blue-100"
     },
     {
-      label: "Pending",
+      label: "Pending Review",
       value: complaints.filter(c => c.status === "PENDING").length,
       icon: Clock,
-      color: "text-orange-600",
-      bg: "bg-orange-50",
-      border: "border-orange-100"
+      color: "text-amber-600",
+      bg: "bg-amber-50",
     },
     {
       label: "In Progress",
-      value: complaints.filter(c => c.status === "IN_PROGRESS").length,
-      icon: Activity,
+      value: complaints.filter(c => c.status === "IN_PROGRESS" || c.status === "UNDER_REVIEW").length,
+      icon: TrendingUp,
       color: "text-purple-600",
       bg: "bg-purple-50",
-      border: "border-purple-100"
     },
     {
       label: "Resolved",
-      value: complaints.filter(c => ["RESOLVED_BY_AUTHORITY", "CLOSED"].includes(c.status)).length,
-      icon: CheckCircle,
-      color: "text-green-600",
-      bg: "bg-green-50",
-      border: "border-green-100"
+      value: complaints.filter(c => ["RESOLVED_BY_AUTHORITY", "CLOSED", "RESOLVED"].includes(c.status)).length,
+      icon: CheckCircle2,
+      color: "text-emerald-600",
+      bg: "bg-emerald-50",
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {stats.map((stat, index) => (
-        <div key={index} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
-              {stat.label}
-            </p>
-            <h2 className="text-3xl font-bold text-slate-900 mt-2">
-              {stat.value}
-            </h2>
-          </div>
-          <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
-            <stat.icon size={24} strokeWidth={2} />
-          </div>
-        </div>
-      ))}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
+      {stats.map((stat, index) => {
+        const IconComp = stat.icon;
+        return (
+          <Card key={index} hoverable className="flex items-center justify-between">
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                {stat.label}
+              </p>
+              <h3 className="text-3xl font-black text-gray-900 leading-none">
+                {stat.value}
+              </h3>
+            </div>
+            <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center flex-shrink-0`}>
+              <IconComp className="w-6 h-6" />
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 };

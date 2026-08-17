@@ -4,9 +4,59 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Civic Track</title>
+    
+    <!-- Primary SEO Metadata -->
+    <title>CivicTrack — Report Civic Issues & Track Resolutions</title>
+    <meta name="title" content="CivicTrack — Report Civic Issues & Track Resolutions" />
+    <meta name="description" content="Report civic issues, track complaint progress in real-time, and improve community accountability with CivicTrack." />
+    <link rel="canonical" href="https://civictrack.example/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://civictrack.example/" />
+    <meta property="og:title" content="CivicTrack — Report Civic Issues & Track Resolutions" />
+    <meta property="og:description" content="Report civic issues, track complaint progress in real-time, and improve community accountability with CivicTrack." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://civictrack.example/" />
+    <meta property="twitter:title" content="CivicTrack — Report Civic Issues & Track Resolutions" />
+    <meta property="twitter:description" content="Report civic issues, track complaint progress in real-time, and improve community accountability with CivicTrack." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- JSON-LD Structured Data for CivicTrack -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://civictrack.example/#organization",
+            "name": "CivicTrack",
+            "url": "https://civictrack.example/",
+            "logo": "https://civictrack.example/vite.png",
+            "description": "Transparent digital platform empowering citizens to report civic issues and track resolutions."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://civictrack.example/#website",
+            "url": "https://civictrack.example/",
+            "name": "CivicTrack",
+            "publisher": { "@id": "https://civictrack.example/#organization" }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "CivicTrack Platform",
+            "operatingSystem": "Web",
+            "applicationCategory": "GovernmentApplication",
+            "description": "Civic issue tracking, real-time resolution monitoring, and municipal accountability platform."
+          }
+        ]
+      }
+    </script>
   </head>
-  <body>
+  <body className="bg-white text-gray-900 antialiased selection:bg-blue-600 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

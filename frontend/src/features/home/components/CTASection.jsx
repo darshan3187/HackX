@@ -1,40 +1,47 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { Send, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CTASection = () => {
   return (
-    <div className="bg-white py-16 sm:py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#1E3A8A] rounded-3xl shadow-xl overflow-hidden relative">
+    <section className="py-16 bg-white font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="bg-[#0B132B] rounded-[36px] p-8 sm:p-12 lg:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
           
-          <div className="absolute top-0 left-0 w-full h-full opacity-10">
-            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
-            </svg>
-          </div>
+          {/* Subtle Background Glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
 
-          <div className="px-6 py-12 md:py-20 text-center relative z-10">
-            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-              Ready to Make a Difference?
-            </h2>
-            <p className="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
-              Join thousands of citizens improving their communities through transparent civic engagement.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <div className="inline-flex rounded-md shadow">
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#1E3A8A] bg-white hover:bg-blue-50 transition-colors"
-                >
-                  Report Your First Issue
-                  <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
-                </a>
-              </div>
+          {/* Left Icon + Text */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left z-10">
+            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/30 flex-shrink-0">
+              <Send className="w-8 h-8" />
+            </div>
+
+            <div className="space-y-1.5">
+              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                Be the change your city needs.
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 font-medium">
+                Report issues. Track progress. Build a better tomorrow.
+              </p>
             </div>
           </div>
+
+          {/* Right Button */}
+          <div className="z-10 flex-shrink-0">
+            <Link
+              to="/signup"
+              className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/30 inline-flex items-center gap-2 transition-all hover:scale-105"
+            >
+              Get Started for Free <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

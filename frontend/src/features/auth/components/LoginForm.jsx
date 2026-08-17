@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../../../services/api';
 import { jwtDecode } from 'jwt-decode';
+import Button from '../../../components/ui/Button';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg("");
 
     try {
       const response = await API.post("/api/token/", {
@@ -22,7 +27,7 @@ const LoginForm = () => {
       localStorage.setItem("access", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
       const decoded = jwtDecode(response.data.access);
-      console.log(decoded.role);
+      
       if (decoded.role === "AUTHORITY") {
         navigate("/admin");
       } else {
@@ -30,73 +35,90 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error("Login failed:", error.response?.data);
-      alert("Invalid credentials");
+      setErrorMsg(error.response?.data?.detail || "Invalid credentials. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+    <div className="w-full space-y-6 font-sans">
+      <div className="space-y-2">
+        <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
           Welcome back
         </h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link to="/signup" className="font-medium text-[#1E3A8A] hover:text-blue-800 transition-colors">
-            Sign up
+        <p className="text-sm text-gray-500 font-medium">
+          Don't have an account yet?{' '}
+          <Link to="/signup" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
+            Sign up for free
           </Link>
         </p>
       </div>
 
-      <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-        <div className="space-y-5">
+      {errorMsg && (
+        <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+          {errorMsg}
+        </div>
+      )}
+
+      <form className="space-y-5" onSubmit={handleLogin}>
+        <div className="space-y-4">
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-bold text-gray-700 tracking-wide mb-1.5">
               Username
             </label>
             <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <User className="h-4 w-4" />
+              </div>
               <input
-                type="username"
+                type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="you123"
-                className="block w-full pl-3 py-3 border border-gray-200 rounded-xl"
+                placeholder="Enter your username"
+                className="w-full bg-white border border-gray-200 rounded-xl text-sm text-gray-900 font-medium placeholder-gray-400 pl-10 pr-4 py-3 transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-bold text-gray-700 tracking-wide mb-1.5">
               Password
             </label>
             <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <Lock className="h-4 w-4" />
+              </div>
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="block w-full pl-3 py-3 border border-gray-200 rounded-xl"
+                className="w-full bg-white border border-gray-200 rounded-xl text-sm text-gray-900 font-medium placeholder-gray-400 pl-10 pr-10 py-3 transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3"
+                className="absolute right-3.5 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none"
               >
-                {showPassword ? <EyeOff /> : <Eye />}
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
           </div>
+
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="hover:cursor-pointer w-full py-3 text-white bg-[#1E3A8A] rounded-xl"
+          isLoading={isLoading}
+          className="w-full py-3.5 text-sm"
+          icon={ArrowRight}
         >
-          Log in
-        </button>
+          Sign In to CivicTrack
+        </Button>
       </form>
     </div>
   );

@@ -3,7 +3,7 @@ import AdminComplaintView from '../../features/complaints/components/AdminCompla
 
 const ComplaintDetail = () => {
     return (
-        <div className="w-full">
+        <div className="w-full font-sans">
             <AdminComplaintView />
         </div>
     );

@@ -14,11 +14,11 @@ import {
    Legend,
    CartesianGrid,
 } from "recharts";
+import Card from "../../../components/ui/Card";
 
-const COLORS = ["#6366f1", "#10b981", "#f97316", "#ef4444", "#8b5cf6"];
+const COLORS = ["#2563EB", "#16A34A", "#9333EA", "#F59E0B", "#EF4444"];
 
 const AdminCharts = ({ complaints = [] }) => {
-
    const totalComplaints = complaints.length;
 
    const statusData = useMemo(() => {
@@ -70,25 +70,24 @@ const AdminCharts = ({ complaints = [] }) => {
          .map(([name, count]) => ({
             name,
             count,
-            percentage: ((count / totalComplaints) * 100).toFixed(1),
+            percentage: ((count / (totalComplaints || 1)) * 100).toFixed(1),
          }))
          .sort((a, b) => b.count - a.count);
    }, [complaints, totalComplaints]);
 
-
    if (!complaints.length) {
       return (
-         <div className="p-10 text-center text-slate-400 font-semibold bg-white rounded-xl border border-dashed border-slate-200">
-            No data available for analytics yet.
-         </div>
+         <Card className="p-10 text-center font-sans">
+            <p className="text-xs font-semibold text-gray-400">No data available for analytics yet.</p>
+         </Card>
       );
    }
 
    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
 
-         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <h3 className="text-sm font-semibold text-slate-700 mb-6">
+         <Card>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-6">
                Status Distribution
             </h3>
 
@@ -109,21 +108,21 @@ const AdminCharts = ({ complaints = [] }) => {
                   />
                   <Tooltip
                      cursor={{ fill: "#f8fafc" }}
-                     contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                     contentStyle={{ borderRadius: "12px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
                   />
                   <Bar
                      dataKey="count"
-                     fill="#6366f1"
-                     radius={[4, 4, 0, 0]}
-                     barSize={40}
+                     fill="#2563EB"
+                     radius={[6, 6, 0, 0]}
+                     barSize={36}
                   />
                </BarChart>
             </ResponsiveContainer>
-         </div>
+         </Card>
 
-         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <h3 className="text-sm font-semibold text-slate-700 mb-6">
-               Complaints (Last 7 Days)
+         <Card>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-6">
+               Complaints Trend (Last 7 Days)
             </h3>
 
             <ResponsiveContainer width="100%" height={260}>
@@ -141,26 +140,26 @@ const AdminCharts = ({ complaints = [] }) => {
                      tickLine={false}
                   />
                   <Tooltip
-                     contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                     contentStyle={{ borderRadius: "12px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
                   />
                   <Line
                      type="monotone"
                      dataKey="count"
-                     stroke="#10b981"
+                     stroke="#16A34A"
                      strokeWidth={3}
                      dot={{ r: 4, strokeWidth: 2, fill: "#fff" }}
                      activeDot={{ r: 6 }}
                   />
                </LineChart>
             </ResponsiveContainer>
-         </div>
+         </Card>
 
-         <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 md:col-span-2">
-            <h3 className="text-sm font-semibold text-slate-700 mb-6">
+         <Card className="md:col-span-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-6">
                Category Breakdown
             </h3>
 
-            <div className="h-[300px] w-full">
+            <div className="h-[280px] w-full">
                <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                      <Pie
@@ -169,12 +168,10 @@ const AdminCharts = ({ complaints = [] }) => {
                         nameKey="name"
                         cx="50%"
                         cy="50%"
-                        innerRadius={60}
-                        outerRadius={100}
-                        paddingAngle={5}
-                        label={({ percentage }) =>
-                           `${percentage}%`
-                        }
+                        innerRadius={55}
+                        outerRadius={95}
+                        paddingAngle={4}
+                        label={({ percentage }) => `${percentage}%`}
                         labelLine={false}
                      >
                         {categoryData.map((entry, index) => (
@@ -186,7 +183,7 @@ const AdminCharts = ({ complaints = [] }) => {
                         ))}
                      </Pie>
                      <Tooltip
-                        contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                        contentStyle={{ borderRadius: "12px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
                      />
                      <Legend
                         verticalAlign="bottom"
@@ -197,11 +194,10 @@ const AdminCharts = ({ complaints = [] }) => {
                   </PieChart>
                </ResponsiveContainer>
             </div>
-         </div>
+         </Card>
 
       </div>
    );
-
 };
 
 export default AdminCharts;

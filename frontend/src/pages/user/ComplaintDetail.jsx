@@ -3,7 +3,7 @@ import ComplaintDetailView from '../../features/complaints/components/ComplaintD
 
 const ComplaintDetail = () => {
   return (
-    <div className="w-full">
+    <div className="w-full font-sans">
       <ComplaintDetailView />
     </div>
   );

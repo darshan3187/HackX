@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-    ArrowLeft,
-    Calendar,
-    MapPin,
-    User,
-    CheckCircle2,
-    Clock,
-    AlertCircle,
-    MoreHorizontal,
-    MessageSquare
-} from "lucide-react";
-import API from "../../../services/api";
-import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Calendar, MapPin, User, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import API, { API_BASE_URL } from "../../../services/api";
+import StatusBadge from "../../../components/ui/StatusBadge";
+import Button from "../../../components/ui/Button";
+import Card from "../../../components/ui/Card";
+import PageHeader from "../../../components/ui/PageHeader";
 
 const AdminComplaintView = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [complaint, setComplaint] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,9 +17,9 @@ const AdminComplaintView = () => {
     const [isUpdating, setIsUpdating] = useState(false);
 
     const statusOptions = [
-        { value: "PENDING", label: "Pending", color: "bg-orange-100 text-orange-700" },
-        { value: "IN_PROGRESS", label: "In Progress", color: "bg-blue-100 text-blue-700" },
-        { value: "RESOLVED_BY_AUTHORITY", label: "Resolved", color: "bg-emerald-100 text-emerald-700" },
+        { value: "PENDING", label: "Pending" },
+        { value: "IN_PROGRESS", label: "In Progress" },
+        { value: "RESOLVED_BY_AUTHORITY", label: "Resolved by Authority" },
     ];
 
     useEffect(() => {
@@ -39,7 +34,7 @@ const AdminComplaintView = () => {
                 setSelectedStatus(response.data.status);
             } catch (error) {
                 console.error("Error fetching complaint:", error);
-                setError("Failed to load complaint data.");
+                setError("Failed to load authority complaint data.");
             } finally {
                 setLoading(false);
             }
@@ -69,223 +64,157 @@ const AdminComplaintView = () => {
         }
     };
 
-    if (loading) return (
-        <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        </div>
-    );
+    if (loading) {
+        return (
+            <div className="bg-white border border-gray-100 rounded-3xl p-12 text-center animate-pulse font-sans">
+                <div className="h-8 bg-gray-100 rounded-xl w-1/3 mx-auto mb-4" />
+                <div className="h-4 bg-gray-100 rounded-lg w-1/2 mx-auto" />
+            </div>
+        );
+    }
 
-    if (error) return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-red-500">
-            <AlertCircle size={48} className="mb-4 text-red-100 fill-red-500" />
-            <p className="font-semibold">{error}</p>
-        </div>
-    );
+    if (error || !complaint) {
+        return (
+            <div className="bg-white border border-gray-100 rounded-3xl p-12 text-center font-sans">
+                <h3 className="text-xl font-bold text-gray-900">Complaint Not Found</h3>
+                <p className="text-xs text-gray-500 mt-2">{error || "The requested issue record could not be retrieved."}</p>
+                <Button className="mt-4" onClick={() => navigate('/admin')}>Back to Admin Portal</Button>
+            </div>
+        );
+    }
 
-    if (!complaint) return <div>Complaint not found</div>;
-
-    const timelineSteps = [
-        { key: "PENDING", label: "Submitted & Pending", date: complaint.created_at },
-        { key: "IN_PROGRESS", label: "Processing", date: null },
-        { key: "RESOLVED_BY_AUTHORITY", label: "Resolution Provided", date: null },
-        { key: "CLOSED", label: "Closed & Verified", date: null }
-    ];
-
-    const currentStatusConfig = statusOptions.find(s => s.value === complaint.status) || {
-        color: "bg-slate-100 text-slate-700",
-        label: complaint.status.replace(/_/g, " ")
-    };
+    const formattedCreatedDate = new Date(complaint.created_at).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    });
 
     return (
-        <div className="max-w-7xl mx-auto space-y-6 pb-12">
-
-            <div className="flex items-center gap-4">
-                <Link to="/admin" className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500 hover:text-slate-900">
-                    <ArrowLeft className="w-5 h-5" />
-                </Link>
-                <div className="flex-1">
-                    <div className="flex items-center gap-3">
-                        <h1 className="text-xl font-bold text-slate-900">Complaint #{complaint.id}</h1>
-                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ${currentStatusConfig.color}`}>
-                            {currentStatusConfig.label}
-                        </span>
-                    </div>
-                </div>
-                <div className="flex gap-2">
-                    <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg">
-                        <MoreHorizontal className="w-5 h-5" />
-                    </button>
-                </div>
-            </div>
+        <div className="max-w-6xl mx-auto space-y-8 font-sans pb-12">
+            <PageHeader
+                title={`Authority Review: Issue #${complaint.id}`}
+                subtitle={`Reported by citizen ${complaint.user}`}
+                breadcrumbs={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Authority Portal', href: '/admin' },
+                    { label: `Issue #${complaint.id}` },
+                ]}
+            />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                <div className="lg:col-span-2 space-y-8">
-
-                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-
-                        <div className="p-8 border-b border-slate-100">
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Subject</span>
-                            <h2 className="text-2xl font-bold text-slate-900 leading-tight">
-                                {complaint.title}
-                            </h2>
+                {/* Left Column: Details & Attachment */}
+                <div className="lg:col-span-2 space-y-6">
+                    <Card>
+                        <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
+                            <StatusBadge status={complaint.status} />
+                            <span className="text-xs font-bold text-gray-400">Category: {complaint.category?.replace("_", " ")}</span>
                         </div>
 
-                        <div className="p-8">
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Description</span>
-                            <p className="text-slate-600 leading-relaxed text-base">
-                                {complaint.description}
-                            </p>
-
-
-                            {complaint.image && (
-                                <div className="mt-8">
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Attachment</span>
-                                    <div className="rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
-                                        <img
-                                            src={complaint.image}
-                                            alt="Complaint Evidence"
-                                            className="w-full h-auto max-h-[500px] object-contain"
-                                            onError={(e) => {
-                                                e.target.onerror = null;
-                                                e.target.src = "https://placehold.co/800x400?text=Image+Load+Error";
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            )}
+                        <h2 className="text-2xl font-black text-gray-900 tracking-tight mb-4">{complaint.title}</h2>
+                        
+                        <div className="space-y-2">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Detailed Description</span>
+                            <p className="text-sm text-gray-600 font-medium leading-relaxed">{complaint.description}</p>
                         </div>
-                    </div>
 
-                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 opacity-50 pointer-events-none grayscale">
-                        <div className="flex items-center gap-3 mb-6">
-                            <MessageSquare className="w-5 h-5 text-slate-400" />
-                            <h3 className="text-lg font-bold text-slate-900">User Feedback</h3>
-                        </div>
-                        <p className="text-slate-500 italic">No feedback submitted yet.</p>
-                    </div>
-
-                </div>
-
-                <div className="space-y-6">
-
-                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-                        <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wide">Update Status</h3>
-
-                        <div className="space-y-4">
-                            <div className="relative">
-                                <select
-                                    value={selectedStatus}
-                                    onChange={(e) => setSelectedStatus(e.target.value)}
-                                    className="w-full appearance-none bg-slate-50 border border-slate-200 text-slate-700 py-3 px-4 pr-8 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-shadow"
-                                    disabled={complaint.status === 'CLOSED'}
-                                >
-                                    {statusOptions.map(option => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                        {complaint.image && (
+                            <div className="mt-6 pt-6 border-t border-gray-100 space-y-3">
+                                <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Submitted Photo Evidence</span>
+                                <div className="aspect-video w-full rounded-2xl overflow-hidden bg-gray-100 border border-gray-100 relative shadow-2xs">
+                                    <img
+                                        src={
+                                            complaint.image?.startsWith("http")
+                                                ? complaint.image
+                                                : `${API_BASE_URL}${complaint.image}`
+                                        }
+                                        alt="Complaint Evidence"
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?q=80&w=800&auto=format&fit=crop";
+                                        }}
+                                    />
                                 </div>
                             </div>
+                        )}
+                    </Card>
+                </div>
 
-                            <button
-                                onClick={handleSaveStatus}
-                                disabled={isUpdating || selectedStatus === complaint.status || complaint.status === 'CLOSED'}
-                                className={`w-full py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-semibold text-sm transition-all
-                                    ${isUpdating || selectedStatus === complaint.status || complaint.status === 'CLOSED'
-                                        ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                                        : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-blue-500/30 active:scale-[0.98]"
-                                    }`}
+                {/* Right Column: Status Update & Location Meta */}
+                <div className="space-y-6">
+                    
+                    {/* Status Update Panel */}
+                    <Card>
+                        <h3 className="text-xs font-black text-gray-900 uppercase tracking-wider mb-4">Update Case Status</h3>
+
+                        <div className="space-y-4">
+                            <select
+                                value={selectedStatus}
+                                onChange={(e) => setSelectedStatus(e.target.value)}
+                                disabled={complaint.status === 'CLOSED'}
+                                className="w-full bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 p-3 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 cursor-pointer disabled:bg-gray-50"
                             >
-                                {isUpdating ? (
-                                    <>
-                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        Updating...
-                                    </>
-                                ) : (
-                                    "Save Changes"
-                                )}
-                            </button>
+                                {statusOptions.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <Button
+                                onClick={handleSaveStatus}
+                                isLoading={isUpdating}
+                                isDisabled={selectedStatus === complaint.status || complaint.status === 'CLOSED'}
+                                className="w-full"
+                            >
+                                Save Status Changes
+                            </Button>
 
                             {complaint.status === 'CLOSED' && (
-                                <p className="text-xs text-center text-slate-400 bg-slate-50 py-2 rounded-lg">
-                                    This complaint is closed and locked.
+                                <p className="text-xs text-center font-medium text-gray-500 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
+                                    This issue has been closed and locked.
                                 </p>
                             )}
                         </div>
-                    </div>
+                    </Card>
 
-                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
-                        <h3 className="text-sm font-bold text-slate-900 mb-2 uppercase tracking-wide">Details</h3>
+                    {/* Metadata Card */}
+                    <Card className="bg-slate-50/50">
+                        <h3 className="text-xs font-black text-gray-900 uppercase tracking-wider mb-4">Reporter & Location</h3>
 
-                        <div className="space-y-4">
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
-                                    <User size={16} />
+                        <div className="space-y-3.5 text-xs font-medium">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                                    <User className="w-4 h-4" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 font-medium uppercase">Reported By</p>
-                                    <p className="text-sm font-semibold text-slate-900">{complaint.user}</p>
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase">Citizen</p>
+                                    <p className="font-bold text-gray-900">{complaint.user}</p>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-purple-50 text-purple-600 rounded-lg">
-                                    <Calendar size={16} />
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
+                                    <Calendar className="w-4 h-4" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 font-medium uppercase">Date Submitted</p>
-                                    <p className="text-sm font-semibold text-slate-900">
-                                        {new Date(complaint.created_at).toLocaleDateString("en-GB", {
-                                            day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"
-                                        })}
-                                    </p>
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase">Submitted On</p>
+                                    <p className="font-bold text-gray-900">{formattedCreatedDate}</p>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-3">
-                                <div className="p-2 bg-orange-50 text-orange-600 rounded-lg">
-                                    <MapPin size={16} />
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-purple-50 text-purple-600 rounded-xl">
+                                    <MapPin className="w-4 h-4" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 font-medium uppercase">Location</p>
-                                    <p className="text-sm font-semibold text-slate-900">{complaint.location}</p>
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase">Location</p>
+                                    <p className="font-bold text-gray-900">{complaint.street}, {complaint.area}, {complaint.city}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 overflow-hidden">
-                        <h3 className="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wide">Progress Timeline</h3>
-
-                        <div className="relative pl-2 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
-                            {timelineSteps.map((step, idx) => {
-                                const isActive = idx <= (
-                                    complaint.status === 'CLOSED' ? 3 :
-                                        complaint.status === 'RESOLVED_BY_AUTHORITY' ? 2 :
-                                            complaint.status === 'IN_PROGRESS' ? 1 : 0
-                                );
-
-                                return (
-                                    <div key={step.key} className="relative flex items-center gap-4">
-                                        <div className={`relative z-10 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors
-                                            ${isActive ? "bg-blue-600 border-blue-600" : "bg-white border-slate-300"}
-                                        `}>
-                                            {isActive && <CheckCircle2 className="w-3 h-3 text-white" />}
-                                        </div>
-                                        <div>
-                                            <p className={`text-xs font-bold uppercase tracking-wide ${isActive ? "text-blue-700" : "text-slate-400"}`}>
-                                                {step.label}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                    </Card>
 
                 </div>
 

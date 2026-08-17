@@ -1,71 +1,99 @@
 import React from 'react';
-import { FileText, Target, BarChart3, Star } from 'lucide-react';
+import { FilePlus2, ListFilter, Award, Users2 } from 'lucide-react';
 
 const HowItWorks = () => {
   const steps = [
     {
-      id: '01',
-      title: 'Report Issue',
-      description: 'Submit your civic complaint with photos and location details instantly.',
-      icon: FileText,
-      color: 'text-orange-500',
-      bg: 'bg-orange-50',
+      number: "01",
+      title: "Report Issue",
+      description: "Submit your civic complaint with photos and location details instantly.",
+      icon: FilePlus2,
+      bgColor: "bg-blue-50",
+      textColor: "text-blue-600",
+      borderColor: "border-blue-100",
     },
     {
-      id: '02',
-      title: 'Track Progress',
-      description: 'Monitor real-time updates as your issue moves towards resolution.',
-      icon: BarChart3,
-      color: 'text-blue-500',
-      bg: 'bg-blue-50',
+      number: "02",
+      title: "Track Progress",
+      description: "Monitor real-time updates as your issue moves towards resolution.",
+      icon: ListFilter,
+      bgColor: "bg-emerald-50",
+      textColor: "text-emerald-600",
+      borderColor: "border-emerald-100",
     },
     {
-      id: '03',
-      title: 'Verify & Rate',
-      description: 'Confirm resolution and provide feedback on the quality of service.',
-      icon: Star,
-      color: 'text-yellow-500',
-      bg: 'bg-yellow-50',
+      number: "03",
+      title: "Verify & Rate",
+      description: "Confirm resolution and rate the quality of service provided.",
+      icon: Award,
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-600",
+      borderColor: "border-purple-100",
+    },
+    {
+      number: "04",
+      title: "Stronger Community",
+      description: "Your feedback helps build accountable and better communities.",
+      icon: Users2,
+      bgColor: "bg-amber-50",
+      textColor: "text-amber-600",
+      borderColor: "border-amber-100",
     },
   ];
 
   return (
-    <div className="py-20 bg-gray-50" id="how-it-works">
+    <section id="how-it-works" className="py-24 bg-white font-sans relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            How CivicTrack Works
-          </h2>
-          <p className="mt-4 text-lg text-gray-500">
-            Simple, transparent, and effective civic issue management in 4 easy steps.
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-20">
+          <p className="text-xs font-bold tracking-widest text-blue-600 uppercase">
+            HOW IT WORKS
           </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
+            Simple steps. <span className="text-blue-600">Real impact.</span>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {steps.map((step) => (
-            <div key={step.id} className="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-              
-              <span className="text-sm font-bold text-gray-400 block mb-4">
-                {step.id}
-              </span>
+        {/* Steps Grid */}
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          {/* Connecting Dotted Line for Desktop */}
+          <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-[2px] border-t-2 border-dashed border-gray-200 -z-0" />
 
-              <div className={`w-14 h-14 ${step.bg} rounded-xl flex items-center justify-center mb-6`}>
-                <step.icon className={`w-7 h-7 ${step.color}`} />
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            return (
+              <div key={idx} className="relative z-10 flex flex-col items-center text-center space-y-4 group">
+                
+                {/* Icon Container */}
+                <div className={`w-20 h-20 rounded-full ${step.bgColor} ${step.textColor} border-2 ${step.borderColor} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className="w-9 h-9" />
+                </div>
+
+                {/* Step Number */}
+                <span className="text-sm font-black text-gray-900 tracking-wider">
+                  {step.number}
+                </span>
+
+                {/* Title */}
+                <h3 className="text-lg font-extrabold text-gray-900">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-gray-500 max-w-xs leading-relaxed font-medium">
+                  {step.description}
+                </p>
+
               </div>
+            );
+          })}
 
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                {step.title}
-              </h3>
-              <p className="text-gray-500 leading-relaxed">
-                {step.description}
-              </p>
-            </div>
-          ))}
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 
