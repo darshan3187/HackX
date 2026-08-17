@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, MoreHorizontal, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import API from '../../../services/api';
+import API, { API_BASE_URL } from '../../../services/api';
 
 const ComplaintsTable = () => {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ const ComplaintsTable = () => {
                       src={
                         item.image?.startsWith("http")
                           ? item.image
-                          : `http://127.0.0.1:8000${item.image}`
+                          : `${API_BASE_URL}${item.image}`
                       }
                       alt={item.title}
                       className="w-12 h-12 rounded-xl object-cover shadow-sm"

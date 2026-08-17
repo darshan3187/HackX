@@ -1,28 +1,22 @@
 import { jwtDecode } from "jwt-decode";
-import React, { useState, useEffect } from 'react';
-import { Menu, X, MapPin, Bell } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, MapPin } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
 
 const Navbar = ({ onMenuClick }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user] = useState(() => {
+    const token = localStorage.getItem("access");
+    if (!token) return null;
+    try {
+      return jwtDecode(token);
+    } catch {
+      return null;
+    }
+  });
   const location = useLocation();
 
   const isDashboard = location.pathname.startsWith('/dashboard');
-
-  useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUser(decoded);
-      } catch (err) {
-        console.error("Invalid token");
-      }
-    }
-  }, []);
 
 
 

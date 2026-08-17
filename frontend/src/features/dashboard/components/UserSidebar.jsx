@@ -1,28 +1,23 @@
 import { jwtDecode } from "jwt-decode";
-import React ,{useState,useEffect} from 'react';
+import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { LayoutDashboard, FileText, MapPin, Settings, User, LogOut } from 'lucide-react';
-import axios from "axios";
+import { LayoutDashboard, FileText, LogOut } from 'lucide-react';
 
 const UserSidebar = ({ closeMobileMenu }) => {
-  const [user, setUser] = useState(null);
+  const [user] = React.useState(() => {
+    const token = localStorage.getItem("access");
+    if (!token) return null;
+    try {
+      return jwtDecode(token);
+    } catch {
+      return null;
+    }
+  });
+
   const menuItems = [
     { icon: LayoutDashboard, label: 'Overview', path: '/dashboard' },
     { icon: FileText, label: 'Report Issue', path: '/dashboard/report' },
   ];
-
-  useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUser(decoded);
-      } catch (err) {
-        console.error("Invalid token");
-      }
-    }
-  }, []);
 
   return (
     <div className="h-full flex flex-col bg-white">

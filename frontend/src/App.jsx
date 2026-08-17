@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 
 import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
@@ -24,14 +24,14 @@ const RootLayout = () => (
     <Navbar />
     <main className="flex-grow font-sans">
       <AnimatePresence mode="wait">
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
           <Outlet />
-        </motion.div>
+        </Motion.div>
       </AnimatePresence>
     </main>
     <Footer />

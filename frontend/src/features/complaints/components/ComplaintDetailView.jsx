@@ -8,7 +8,7 @@ import {
    CheckCircle2,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
-import API from "../../../services/api";
+import API, { API_BASE_URL } from "../../../services/api";
 
 const ComplaintDetailView = () => {
    const { id } = useParams();
@@ -155,6 +155,11 @@ const ComplaintDetailView = () => {
 
          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
+               {errorMessage && (
+                  <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-sm font-medium">
+                     {errorMessage}
+                  </div>
+               )}
                <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
                   <div className="flex flex-wrap gap-3 mb-4">
                      <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">
@@ -274,7 +279,7 @@ const ComplaintDetailView = () => {
                         src={
                            complaint.image?.startsWith("http")
                               ? complaint.image
-                              : `http://127.0.0.1:8000${complaint.image}`
+                              : `${API_BASE_URL}${complaint.image}`
                         }
                         alt="Evidence"
                         className="w-full h-full object-cover"

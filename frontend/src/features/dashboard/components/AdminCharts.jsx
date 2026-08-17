@@ -172,7 +172,7 @@ const AdminCharts = ({ complaints = [] }) => {
                         innerRadius={60}
                         outerRadius={100}
                         paddingAngle={5}
-                        label={({ name, percentage }) =>
+                        label={({ percentage }) =>
                            `${percentage}%`
                         }
                         labelLine={false}

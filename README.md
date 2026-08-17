@@ -13,7 +13,6 @@ Civic Tracker is a full-stack civic grievance platform where citizens can report
 - [System Overview](#system-overview)
 - [How to Get Started](#how-to-get-started)
 - [Usage Examples](#usage-examples)
-- [Where to Get Help](#where-to-get-help)
 - [Who Maintains and Contributes](#who-maintains-and-contributes)
 - [License](#license)
 
@@ -170,19 +169,6 @@ curl -X POST http://127.0.0.1:8000/api/complaints/ \
 - `/dashboard` -> Citizen dashboard (protected)
 - `/dashboard/report` -> Report issue form
 - `/admin` -> Authority dashboard (protected)
-
-## Where to Get Help
-
-- Open an issue: https://github.com/darshan3187/HackX/issues
-- Review backend auth and API routing: [backend/backend/urls.py](backend/backend/urls.py), [backend/users/urls.py](backend/users/urls.py), [backend/complaints/urls.py](backend/complaints/urls.py)
-- Review frontend route protection: [frontend/src/components/PrivateRoute.jsx](frontend/src/components/PrivateRoute.jsx)
-
-If you report a bug, include:
-
-- Steps to reproduce
-- Expected vs actual behavior
-- Backend and frontend logs
-- Sample request payload (without secrets)
 
 ## Who Maintains and Contributes
 

@@ -6,20 +6,21 @@ const PrivateRoute = ({ allowedRole }) => {
 
     if (!token) return <Navigate to="/login" replace />;
 
+    let isAuthorized = false;
     try {
         const decoded = jwtDecode(token);
-        console.log("Decoded token:", decoded);
-
-        if (allowedRole && decoded.role !== allowedRole) {
-            return <Navigate to="/login" replace />;
+        if (!allowedRole || decoded.role === allowedRole) {
+            isAuthorized = true;
         }
-
-        return <Outlet />;
     } catch (err) {
         console.log("Decode error:", err);
+    }
+
+    if (!isAuthorized) {
         return <Navigate to="/login" replace />;
     }
 
+    return <Outlet />;
 };
 
 export default PrivateRoute;

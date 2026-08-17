@@ -3,7 +3,7 @@ import { Download, Filter, RefreshCcw } from 'lucide-react';
 import AdminStatsCards from '../../features/dashboard/components/AdminStatsCards';
 import AdminCharts from '../../features/dashboard/components/AdminCharts';
 import AdminComplaintsTable from '../../features/complaints/components/AdminComplaintsTable';
-import axios from 'axios';
+import API from '../../services/api';
 
 const AdminDashboard = () => {
   const [complaints, setComplaints] = useState([]);
@@ -15,8 +15,8 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("access");
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/complaints/",
+      const response = await API.get(
+        "/api/complaints/",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
