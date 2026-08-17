@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Calendar, MapPin, User, Clock, CheckCircle2, Trash2, Edit2, Check, X } from "lucide-react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import API, { API_BASE_URL } from "../../../services/api";
+import { Calendar, MapPin, User, Clock, CheckCircle2, Trash2, Edit2, Check, X } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../../services/api";
+import { complaintService } from "../../../services/complaints";
+import { formatDate } from "../../../utils/date";
 import StatusBadge from "../../../components/ui/StatusBadge";
 import Button from "../../../components/ui/Button";
 import Card from "../../../components/ui/Card";
@@ -18,13 +20,8 @@ const ComplaintDetailView = () => {
 
    const handleSave = async () => {
       try {
-         const token = localStorage.getItem("access");
-         const response = await API.patch(
-            `/api/complaints/${id}/edit_fields/`,
-            editedData,
-            { headers: { Authorization: `Bearer ${token}` } }
-         );
-         setComplaint(response.data);
+         const data = await complaintService.editComplaintFields(id, editedData);
+         setComplaint(data);
          setIsEditing(false);
          setErrorMessage("");
       } catch (error) {
@@ -37,10 +34,7 @@ const ComplaintDetailView = () => {
       if (!confirmDelete) return;
 
       try {
-         const token = localStorage.getItem("access");
-         await API.delete(`/api/complaints/${id}/`, {
-            headers: { Authorization: `Bearer ${token}` },
-         });
+         await complaintService.deleteComplaint(id);
          navigate("/dashboard");
       } catch (error) {
          setErrorMessage(error.response?.data?.error || "Delete failed.");
@@ -50,11 +44,8 @@ const ComplaintDetailView = () => {
    useEffect(() => {
       const fetchComplaint = async () => {
          try {
-            const token = localStorage.getItem("access");
-            const response = await API.get(`/api/complaints/${id}/`, {
-               headers: { Authorization: `Bearer ${token}` },
-            });
-            setComplaint(response.data);
+            const data = await complaintService.getComplaintById(id);
+            setComplaint(data);
          } catch (error) {
             console.error("Error fetching complaint:", error.response?.data);
          } finally {
@@ -84,28 +75,12 @@ const ComplaintDetailView = () => {
       );
    }
 
-   const formattedCreatedDate = new Date(complaint.created_at).toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-   });
-
-   const formattedUpdatedDate = complaint.updated_at
-      ? new Date(complaint.updated_at).toLocaleDateString("en-GB", {
-         day: "2-digit",
-         month: "short",
-         year: "numeric",
-      })
-      : "";
+   const formattedCreatedDate = formatDate(complaint.created_at);
+   const formattedUpdatedDate = formatDate(complaint.updated_at);
 
    const handleConfirm = async () => {
       try {
-         const token = localStorage.getItem("access");
-         await API.post(
-            `/api/complaints/${id}/confirm_solution/`,
-            { confirmed: true },
-            { headers: { Authorization: `Bearer ${token}` } }
-         );
+         await complaintService.confirmSolution(id, true);
          window.location.reload();
       } catch (error) {
          console.error(error.response?.data);
@@ -114,12 +89,7 @@ const ComplaintDetailView = () => {
 
    const handleReopen = async () => {
       try {
-         const token = localStorage.getItem("access");
-         await API.post(
-            `/api/complaints/${id}/confirm_solution/`,
-            { confirmed: false },
-            { headers: { Authorization: `Bearer ${token}` } }
-         );
+         await complaintService.confirmSolution(id, false);
          window.location.reload();
       } catch (error) {
          console.error(error.response?.data);
@@ -251,7 +221,7 @@ const ComplaintDetailView = () => {
                               ? complaint.image
                               : `${API_BASE_URL}${complaint.image}`
                         }
-                        alt="Issue photo evidence"
+                        alt="Evidence photo"
                         className="w-full h-full object-cover"
                         onError={(e) => {
                            e.target.src = "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?q=80&w=800&auto=format&fit=crop";

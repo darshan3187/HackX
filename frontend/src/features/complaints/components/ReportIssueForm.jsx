@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
-import { Upload, MapPin, Camera, Navigation, Send, ArrowLeft, CheckCircle2, Image as ImageIcon } from "lucide-react";
+import { Upload, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import API from "../../../services/api";
+import { complaintService } from "../../../services/complaints";
+import { CATEGORY_OPTIONS } from "../../../constants/complaints";
 import Button from "../../../components/ui/Button";
 
 const ReportIssueForm = () => {
@@ -47,7 +48,6 @@ const ReportIssueForm = () => {
       setIsLoading(true);
       setErrorMsg("");
 
-      const token = localStorage.getItem("access");
       const data = new FormData();
       data.append("title", formData.title);
       data.append("description", formData.description);
@@ -62,19 +62,10 @@ const ReportIssueForm = () => {
       }
 
       try {
-         await API.post(
-            "/api/complaints/",
-            data,
-            {
-               headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "multipart/form-data",
-               },
-            }
-         );
+         await complaintService.createComplaint(data);
          navigate("/dashboard");
       } catch (error) {
-         console.error("Full error:", error);
+         console.error("Submission error:", error);
          setErrorMsg("Failed to submit issue. Please verify all required fields.");
       } finally {
          setIsLoading(false);
@@ -143,12 +134,11 @@ const ReportIssueForm = () => {
                            onChange={handleChange}
                            className="w-full bg-white border border-gray-200 rounded-xl text-sm px-4 py-3 font-medium focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 cursor-pointer"
                         >
-                           <option value="GARBAGE">Garbage / Waste Collection</option>
-                           <option value="STREETLIGHT">Street Light Outage</option>
-                           <option value="POTHOLE">Pothole / Road Damage</option>
-                           <option value="WATER_LEAKAGE">Water Leakage</option>
-                           <option value="DRAINAGE">Drainage Overflow</option>
-                           <option value="OTHER">Other Issue</option>
+                           {CATEGORY_OPTIONS.map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                 {opt.label}
+                              </option>
+                           ))}
                         </select>
                      </div>
                   </div>

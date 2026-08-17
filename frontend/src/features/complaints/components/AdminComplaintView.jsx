@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Calendar, MapPin, User, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import API, { API_BASE_URL } from "../../../services/api";
+import { Calendar, MapPin, User } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../../services/api";
+import { complaintService } from "../../../services/complaints";
+import { formatDate } from "../../../utils/date";
+import { STATUS_OPTIONS_ADMIN } from "../../../constants/complaints";
 import StatusBadge from "../../../components/ui/StatusBadge";
 import Button from "../../../components/ui/Button";
 import Card from "../../../components/ui/Card";
@@ -15,25 +18,16 @@ const AdminComplaintView = () => {
     const [error, setError] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
-
-    const statusOptions = [
-        { value: "PENDING", label: "Pending" },
-        { value: "IN_PROGRESS", label: "In Progress" },
-        { value: "RESOLVED_BY_AUTHORITY", label: "Resolved by Authority" },
-    ];
+    const [statusSuccess, setStatusSuccess] = useState(false);
 
     useEffect(() => {
         const fetchComplaint = async () => {
             try {
-                const token = localStorage.getItem("access");
-                const response = await API.get(
-                    `/api/complaints/${id}/`,
-                    { headers: { Authorization: `Bearer ${token}` } }
-                );
-                setComplaint(response.data);
-                setSelectedStatus(response.data.status);
-            } catch (error) {
-                console.error("Error fetching complaint:", error);
+                const data = await complaintService.getComplaintById(id);
+                setComplaint(data);
+                setSelectedStatus(data.status);
+            } catch (err) {
+                console.error("Error fetching complaint:", err);
                 setError("Failed to load authority complaint data.");
             } finally {
                 setLoading(false);
@@ -46,18 +40,15 @@ const AdminComplaintView = () => {
     const handleSaveStatus = async () => {
         if (!selectedStatus || selectedStatus === complaint.status) return;
         setIsUpdating(true);
+        setStatusSuccess(false);
         try {
-            const token = localStorage.getItem("access");
-            await API.patch(
-                `/api/complaints/${id}/update_status/`,
-                { status: selectedStatus },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await complaintService.updateComplaintStatus(id, selectedStatus);
             setComplaint({ ...complaint, status: selectedStatus });
-            alert("Status updated successfully!");
-        } catch (error) {
-            console.error("Error updating status:", error);
-            alert(error.response?.data?.error || "Failed to update status.");
+            setStatusSuccess(true);
+            setTimeout(() => setStatusSuccess(false), 3000);
+        } catch (err) {
+            console.error("Error updating status:", err);
+            alert(err.response?.data?.error || "Failed to update status.");
             setSelectedStatus(complaint.status);
         } finally {
             setIsUpdating(false);
@@ -83,11 +74,7 @@ const AdminComplaintView = () => {
         );
     }
 
-    const formattedCreatedDate = new Date(complaint.created_at).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-    });
+    const formattedCreatedDate = formatDate(complaint.created_at);
 
     return (
         <div className="max-w-6xl mx-auto space-y-8 font-sans pb-12">
@@ -148,6 +135,12 @@ const AdminComplaintView = () => {
                     <Card>
                         <h3 className="text-xs font-black text-gray-900 uppercase tracking-wider mb-4">Update Case Status</h3>
 
+                        {statusSuccess && (
+                            <div className="p-3 mb-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
+                                Status updated successfully!
+                            </div>
+                        )}
+
                         <div className="space-y-4">
                             <select
                                 value={selectedStatus}
@@ -155,7 +148,7 @@ const AdminComplaintView = () => {
                                 disabled={complaint.status === 'CLOSED'}
                                 className="w-full bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 p-3 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 cursor-pointer disabled:bg-gray-50"
                             >
-                                {statusOptions.map(option => (
+                                {STATUS_OPTIONS_ADMIN.map(option => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>

@@ -3,7 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import AdminStatsCards from '../../features/dashboard/components/AdminStatsCards';
 import AdminCharts from '../../features/dashboard/components/AdminCharts';
 import AdminComplaintsTable from '../../features/complaints/components/AdminComplaintsTable';
-import API from '../../services/api';
+import { complaintService } from '../../services/complaints';
 import PageHeader from '../../components/ui/PageHeader';
 import Button from '../../components/ui/Button';
 
@@ -16,11 +16,8 @@ const AdminDashboard = () => {
   const fetchComplaints = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("access");
-      const response = await API.get("/api/complaints/", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setComplaints(response.data);
+      const data = await complaintService.getComplaints();
+      setComplaints(data);
       setLastUpdated(new Date());
       setError(null);
     } catch (err) {

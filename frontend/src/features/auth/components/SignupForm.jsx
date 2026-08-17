@@ -32,7 +32,6 @@ const SignupForm = () => {
       await API.post('api/users/register/', formData);
       navigate('/login');
     } catch (error) {
-      console.log(error.response?.data);
       setErrorMsg(error.response?.data?.username?.[0] || error.response?.data?.detail || "Registration failed. Please check your details.");
     } finally {
       setIsLoading(false);

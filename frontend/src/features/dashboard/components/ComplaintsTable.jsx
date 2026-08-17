@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import API, { API_BASE_URL } from '../../../services/api';
+import { API_BASE_URL } from '../../../services/api';
+import { complaintService } from '../../../services/complaints';
+import { formatDate } from '../../../utils/date';
 import StatusBadge from '../../../components/ui/StatusBadge';
 import Button from '../../../components/ui/Button';
 import EmptyState from '../../../components/ui/EmptyState';
@@ -15,11 +17,8 @@ const ComplaintsTable = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const token = localStorage.getItem("access");
-        const response = await API.get("/api/complaints/", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setAllComplaints(response.data);
+        const data = await complaintService.getComplaints();
+        setAllComplaints(data);
       } catch (error) {
         console.error("Error fetching complaints:", error.response?.data);
       } finally {
@@ -112,11 +111,7 @@ const ComplaintsTable = () => {
                     <StatusBadge status={item.status} />
                   </td>
                   <td className="px-6 py-4 text-xs font-medium text-gray-400 whitespace-nowrap">
-                    {new Date(item.created_at).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })}
+                    {formatDate(item.created_at)}
                   </td>
                 </tr>
               ))}

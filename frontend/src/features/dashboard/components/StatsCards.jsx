@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Clock, CheckCircle2, AlertCircle } from "lucide-react";
-import API from '../../../services/api';
+import { complaintService } from '../../../services/complaints';
 import Card from '../../../components/ui/Card';
 
 const StatsCards = () => {
@@ -9,11 +9,8 @@ const StatsCards = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const token = localStorage.getItem("access");
-        const response = await API.get("/api/complaints/", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setComplaints(response.data);
+        const data = await complaintService.getComplaints();
+        setComplaints(data);
       } catch (error) {
         console.error("Error fetching complaints:", error.response?.data);
       }
