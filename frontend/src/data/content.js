@@ -1,60 +1,54 @@
 // Centralized Content Data for CivicTrack Landing Page
+import { SITE_CONFIG } from '../constants/siteConfig';
 
 export const heroContent = {
-  eyebrow: "Smarter Communities. Stronger Cities.",
+  eyebrow: "Independent Civic Technology",
   headline: {
     line1: "Report Issues.",
     line2: "Track Resolution.",
     line3: "Build Better Together.",
   },
-  description: "CivicTrack is a transparent digital platform that helps citizens report civic issues, track real-time progress, and ensure accountability in their communities.",
+  description: "CivicTrack is an independent digital platform that helps citizens report civic issues, track progress transparently, and foster accountability in their communities.",
   ctaPrimary: "Report an Issue",
   ctaSecondary: "View Live Dashboard",
-  ratingScore: "4.8/5",
-  ratingText: "Trusted by 10,000+ active citizens",
-  avatars: [
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop"
-  ],
+  badgeText: "Independent Civic Technology Project",
   heroImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
   floatingCards: [
-    { title: "Pothole on 5th Street", status: "Under Review", variant: "blue" },
+    { title: "Pothole Report", status: "Under Review", variant: "blue" },
     { title: "Street Light Out", status: "Resolved", variant: "emerald" },
-    { title: "Garbage Not Collected", status: "In Progress", variant: "purple" },
+    { title: "Garbage Dump", status: "In Progress", variant: "purple" },
   ]
 };
 
 export const metricsData = [
-  { value: 1247, label: "Issues Resolved", format: "number", icon: "FileText" },
-  { value: 3.2, label: "Days Avg. Response", format: "decimal", icon: "TrendingUp" },
-  { value: 98, label: "Citizen Satisfaction", format: "percent", icon: "Users" },
-  { value: 120, label: "Cities Empowered", format: "plus", icon: "Building2" },
+  { label: "End-to-End Tracking", description: "Track issues from submission to resolution", icon: "FileText" },
+  { label: "Real-Time Updates", description: "Live status visibility for lodged reports", icon: "TrendingUp" },
+  { label: "Transparent Platform", description: "Open public issue feed & status logs", icon: "Users" },
+  { label: "Citizen-Focused", description: "Designed for individuals & neighborhoods", icon: "Building2" },
 ];
 
 export const featuresData = {
   eyebrow: "WHY CIVICTRACK?",
-  title: "Powerful features for transparent governance",
+  title: "Core capabilities for transparent civic tracking",
   items: [
     {
       id: "tracking",
-      title: "Real-time Tracking",
-      description: "Track your complaint in real-time with live updates at every step of the resolution process.",
+      title: "Real-time Status Tracking",
+      description: "Follow your reported issue in real-time with status updates at every stage of the resolution process.",
       linkText: "Learn more",
       variant: "blue",
     },
     {
       id: "process",
       title: "Transparent Process",
-      description: "Complete visibility into the resolution process with direct access to assigned municipal departments.",
+      description: "Clear visibility into issue progress, timestamps, and assigned categories without hidden steps.",
       linkText: "Learn more",
       variant: "emerald",
     },
     {
       id: "resolution",
-      title: "Verified Resolution",
-      description: "Photo proof and citizen feedback ensure strict accountability before issues are marked complete.",
+      title: "Photo Proof Support",
+      description: "Attach photo evidence to reports and view completion photos uploaded upon issue resolution.",
       linkText: "Learn more",
       variant: "purple",
     },
@@ -63,98 +57,94 @@ export const featuresData = {
 
 export const howItWorksData = {
   eyebrow: "HOW IT WORKS",
-  title: "Simple steps. Real impact.",
+  title: "Simple steps for transparent reporting",
   steps: [
     {
       number: "01",
       title: "Report Issue",
-      description: "Submit your civic complaint with photos and location details instantly.",
+      description: "Submit a report with location details, description, and optional photo proof.",
       variant: "blue",
     },
     {
       number: "02",
       title: "Track Progress",
-      description: "Monitor real-time updates as your issue moves towards resolution.",
+      description: "Monitor real-time updates as your report moves through evaluation and work stages.",
       variant: "emerald",
     },
     {
       number: "03",
-      title: "Verify & Rate",
-      description: "Confirm resolution and rate the quality of service provided.",
+      title: "Review Completion",
+      description: "Inspect resolution photos and verify that the issue has been addressed.",
       variant: "purple",
     },
     {
       number: "04",
       title: "Stronger Community",
-      description: "Your feedback helps build accountable and better communities.",
+      description: "Your participation helps build cleaner, safer, and more transparent neighborhoods.",
       variant: "amber",
     },
   ]
 };
 
 export const dashboardShowcaseData = {
-  eyebrow: "OPEN. ACCOUNTABLE. EFFECTIVE.",
-  title: "Your voice drives change.",
-  description: "CivicTrack connects citizens and local authorities to create cleaner, safer, and better neighborhoods for everyone.",
+  eyebrow: "OPEN. TRANSPARENT. ACCESSIBLE.",
+  title: "Clear issue tracking at a glance",
+  description: "CivicTrack provides a simple interface for citizens to submit, track, and monitor public infrastructure issues transparently.",
   bullets: [
-    "Easy issue reporting",
+    "Geotagged issue reporting",
     "Real-time status updates",
-    "Data-driven insights",
+    "Clean application dashboard",
   ],
-  stats: {
-    resolved: { count: 724, change: "+2% this month" },
-    inProgress: { count: 312, change: "+5% this month" },
-    underReview: { count: 211, change: "-3% this month" },
-    total: 1247
-  }
+  previewNote: "UI Feature Preview (Application Demo)",
 };
 
-export const testimonialsData = {
-  eyebrow: "WHAT CITIZENS SAY",
-  title: "Trusted by communities that care.",
-  items: [
+export const platformGuaranteesData = {
+  eyebrow: "OUR COMMITMENT",
+  title: "Built for transparency. Built for citizens.",
+  description: "CivicTrack is grounded in core principles of open governance, factual communication, and citizen empowerment.",
+  principles: [
     {
-      quote: "CivicTrack made it so easy to report and track issues in my area. Love the transparency!",
-      name: "Priya Sharma",
-      city: "Gurugram",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+      title: "Independent Platform",
+      description: "CivicTrack is an independent project created by solo developer Darshan Rajgor to make civic reporting clear and accessible.",
+      icon: "ShieldCheck",
     },
     {
-      quote: "Finally, a platform that actually keeps us updated. Our city is changing for the better.",
-      name: "Ravi Patel",
-      city: "Ahmedabad",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      title: "Complete Openness",
+      description: "No hidden statuses or black-box workflows. Issue progress is displayed clearly for citizens.",
+      icon: "FileText",
     },
     {
-      quote: "The photo updates and real-time tracking build so much trust between citizens and authorities.",
-      name: "Neha Verma",
-      city: "Pune",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+      title: "Factually Honest",
+      description: "We communicate what our software actually does, avoiding fabricated statistics or fake claims.",
+      icon: "CheckCircle2",
     },
   ]
 };
 
 export const ctaContent = {
-  title: "Be the change your city needs.",
-  subtitle: "Report issues. Track progress. Build a better tomorrow.",
-  buttonText: "Get Started for Free",
+  title: "Experience transparent civic tracking.",
+  subtitle: "Report issues. Track progress. Help build better neighborhoods.",
+  buttonText: "Get Started Free",
 };
 
 export const footerData = {
-  tagline: "Empowering citizens. Building better communities.",
+  tagline: SITE_CONFIG.tagline,
   quickLinks: [
     { name: "Home", href: "/" },
     { name: "Features", href: "/features" },
     { name: "How It Works", href: "/how-it-works" },
     { name: "Dashboard", href: "/dashboard" },
     { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/blog" },
+    { name: "Insights", href: "/insights" },
     { name: "Contact", href: "/contact" },
   ],
   resources: [
-    { name: "Features", href: "/features" },
-    { name: "How It Works", href: "/how-it-works" },
-    { name: "Contact Support", href: "/contact" },
+    { name: "Insights Hub", href: "/insights" },
+    { name: "Civic Issue Reporting", href: "/insights/category/civic-issue-reporting" },
+    { name: "Civic Technology", href: "/insights/category/civic-technology" },
+    { name: "Smart Cities", href: "/insights/category/smart-cities" },
+    { name: "Municipal Services", href: "/insights/category/municipal-services" },
   ],
-  copyright: "© 2026 CivicTrack. All rights reserved.",
+  copyright: SITE_CONFIG.copyright,
+  disclaimer: SITE_CONFIG.disclaimer,
 };

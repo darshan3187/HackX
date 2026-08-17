@@ -9,7 +9,7 @@ const FeaturesPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PageHeader
           title="Platform Features"
-          subtitle="Explore the powerful civic tools enabling transparent citizen-government collaboration."
+          subtitle="Explore the civic tools enabling transparent issue reporting and status tracking."
           breadcrumbs={[
             { label: 'Home', href: '/' },
             { label: 'Features' },

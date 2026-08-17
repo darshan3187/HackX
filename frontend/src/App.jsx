@@ -5,7 +5,7 @@ import { motion as Motion, AnimatePresence } from 'framer-motion';
 import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
 import UserLayout from './layouts/UserLayout';
-import Loader from './components/feedback/Loader';
+import PageTransitionLoader from './components/layout/PageTransitionLoader';
 import PrivateRoute from "./components/PrivateRoute";
 
 const Home = lazy(() => import('./pages/public/Home'));
@@ -15,6 +15,9 @@ const FeaturesPage = lazy(() => import('./pages/public/FeaturesPage'));
 const HowItWorksPage = lazy(() => import('./pages/public/HowItWorksPage'));
 const AboutPage = lazy(() => import('./pages/public/AboutPage'));
 const ContactPage = lazy(() => import('./pages/public/ContactPage'));
+const InsightsPage = lazy(() => import('./pages/public/InsightsPage'));
+const InsightsCategoryPage = lazy(() => import('./pages/public/InsightsCategoryPage'));
+const ArticleDetailPage = lazy(() => import('./pages/public/ArticleDetailPage'));
 const BlogPage = lazy(() => import('./pages/public/BlogPage'));
 const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage'));
 
@@ -48,7 +51,8 @@ const RootLayout = () => (
 function App() {
   return (
     <Router>
-      <Suspense fallback={<Loader />}>
+      <PageTransitionLoader />
+      <Suspense fallback={null}>
         <Routes>
 
           <Route path="/" element={<RootLayout />}>
@@ -59,6 +63,9 @@ function App() {
             <Route path="how-it-works" element={<HowItWorksPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="insights" element={<InsightsPage />} />
+            <Route path="insights/category/:categorySlug" element={<InsightsCategoryPage />} />
+            <Route path="insights/:slug" element={<ArticleDetailPage />} />
             <Route path="blog" element={<BlogPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

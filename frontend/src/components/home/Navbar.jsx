@@ -39,7 +39,7 @@ const Navbar = ({ onMenuClick }) => {
     { name: 'How It Works', path: '/how-it-works' },
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'About Us', path: '/about' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'Insights', path: '/insights' },
     { name: 'Contact', path: '/contact' },
   ];
 

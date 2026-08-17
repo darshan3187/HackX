@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ShieldAlert } from 'lucide-react';
 import { dashboardShowcaseData } from '../../data/content';
 import { fadeLeft, fadeRight, viewportOnce } from '../../animations/variants';
 
@@ -19,9 +19,9 @@ const DashboardShowcase = () => {
             variants={fadeLeft}
             className="lg:col-span-5 space-y-6"
           >
-            <p className="text-xs font-bold tracking-widest text-blue-600 uppercase">
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold border border-blue-100">
               {dashboardShowcaseData.eyebrow}
-            </p>
+            </div>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight leading-tight">
               {dashboardShowcaseData.title}
@@ -60,7 +60,7 @@ const DashboardShowcase = () => {
             >
               <div className="bg-white rounded-[28px] overflow-hidden p-4 space-y-4">
                 <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                  <span className="text-[10px] font-bold text-gray-400">9:41</span>
+                  <span className="text-[10px] font-bold text-blue-600">UI Demo Preview</span>
                   <span className="text-xs font-extrabold text-gray-900">Dashboard</span>
                 </div>
                 
@@ -83,20 +83,20 @@ const DashboardShowcase = () => {
                       />
                     </svg>
                     <div className="absolute flex flex-col items-center">
-                      <span className="text-[9px] text-gray-400 font-medium">Total Issues</span>
-                      <span className="text-sm font-black text-gray-900">{dashboardShowcaseData.stats.total.toLocaleString()}</span>
+                      <span className="text-[9px] text-gray-400 font-medium">Issue Feed</span>
+                      <span className="text-xs font-black text-gray-900">Track Live</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center bg-gray-50 p-2 rounded-xl text-[11px]">
-                    <span className="font-bold text-gray-700">Resolved</span>
-                    <span className="font-extrabold text-emerald-600">{dashboardShowcaseData.stats.resolved.count}</span>
+                    <span className="font-bold text-gray-700">Resolved Status</span>
+                    <span className="font-extrabold text-emerald-600">Verified</span>
                   </div>
                   <div className="flex justify-between items-center bg-gray-50 p-2 rounded-xl text-[11px]">
                     <span className="font-bold text-gray-700">In Progress</span>
-                    <span className="font-extrabold text-purple-600">{dashboardShowcaseData.stats.inProgress.count}</span>
+                    <span className="font-extrabold text-purple-600">Active</span>
                   </div>
                 </div>
               </div>
@@ -109,34 +109,31 @@ const DashboardShowcase = () => {
               className="hidden sm:block absolute top-4 right-0 lg:-right-4 z-10 w-[380px] sm:w-[440px] bg-white rounded-3xl border border-gray-100 shadow-2xl p-6 space-y-5"
             >
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <span className="text-sm font-bold text-gray-900">Dashboard Overview</span>
-                <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-lg">This Month ▾</span>
+                <span className="text-sm font-bold text-gray-900">Application UI Preview</span>
+                <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">Demo View</span>
               </div>
 
               {/* 3 Metric Cards */}
               <div className="grid grid-cols-3 gap-3 text-center">
                 <div className="bg-gray-50 p-3 rounded-2xl">
                   <p className="text-[10px] text-gray-500 font-semibold">Resolved</p>
-                  <p className="text-lg font-black text-gray-900">{dashboardShowcaseData.stats.resolved.count}</p>
-                  <p className="text-[9px] font-bold text-emerald-600">{dashboardShowcaseData.stats.resolved.change}</p>
+                  <p className="text-sm font-black text-emerald-600">Photo Verified</p>
                 </div>
                 <div className="bg-gray-50 p-3 rounded-2xl">
                   <p className="text-[10px] text-gray-500 font-semibold">In Progress</p>
-                  <p className="text-lg font-black text-gray-900">{dashboardShowcaseData.stats.inProgress.count}</p>
-                  <p className="text-[9px] font-bold text-emerald-600">{dashboardShowcaseData.stats.inProgress.change}</p>
+                  <p className="text-sm font-black text-purple-600">Assigned</p>
                 </div>
                 <div className="bg-gray-50 p-3 rounded-2xl">
                   <p className="text-[10px] text-gray-500 font-semibold">Under Review</p>
-                  <p className="text-lg font-black text-gray-900">{dashboardShowcaseData.stats.underReview.count}</p>
-                  <p className="text-[9px] font-bold text-rose-500">{dashboardShowcaseData.stats.underReview.change}</p>
+                  <p className="text-sm font-black text-amber-600">Logged</p>
                 </div>
               </div>
 
               {/* Graph Container */}
               <div className="pt-2">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-bold text-gray-900">Issues Trend</span>
-                  <span className="text-[10px] text-gray-400 font-medium">Last 6 Months ▾</span>
+                  <span className="text-xs font-bold text-gray-900">Issue Progress Flow</span>
+                  <span className="text-[10px] text-gray-400 font-medium">Real-time log</span>
                 </div>
 
                 {/* SVG Progressive Line Chart */}

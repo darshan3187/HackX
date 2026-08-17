@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /insights/
 Disallow: /admin/
+Disallow: /dashboard/
 Disallow: /api/
 
 Sitemap: https://civictrack.example/sitemap.xml

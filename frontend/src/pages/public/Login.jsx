@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginForm from '../../features/auth/components/LoginForm';
-import { ShieldCheck, Star } from 'lucide-react';
+import { ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { SITE_CONFIG } from '../../constants/siteConfig';
 
 const Login = () => {
   return (
@@ -22,37 +23,31 @@ const Login = () => {
 
         <div className="relative z-10 space-y-6 max-w-lg">
           <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider">
-            TRANSPARENT CIVIC GOVERNANCE
+            TRANSPARENT CIVIC REPORTING
           </div>
 
           <h2 className="text-4xl font-black tracking-tight text-white leading-tight">
-            Building accountable, cleaner, and safer cities together.
+            Building accountable, cleaner, and safer neighborhoods together.
           </h2>
 
           <p className="text-slate-300 text-sm font-normal leading-relaxed">
-            Join over 10,000+ active citizens reporting potholes, street lights, and municipal issues with real-time status updates.
+            Report potholes, street lights, and sanitation issues with open status tracking and photo proof support.
           </p>
 
-          <div className="flex items-center gap-4 pt-4 border-t border-slate-800">
-            <div className="flex -space-x-2">
-              <img className="w-9 h-9 rounded-full ring-2 ring-slate-900 object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" alt="User" />
-              <img className="w-9 h-9 rounded-full ring-2 ring-slate-900 object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="User" />
-              <img className="w-9 h-9 rounded-full ring-2 ring-slate-900 object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" alt="User" />
+          <div className="space-y-2.5 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-300">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>Independent civic technology platform</span>
             </div>
-            <div>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                ))}
-                <span className="text-xs font-bold text-white ml-1">4.8/5</span>
-              </div>
-              <p className="text-xs text-slate-400">Trusted by citizens nationwide</p>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>Geotagged location markers & photo proof</span>
             </div>
           </div>
         </div>
 
         <div className="relative z-10 text-xs text-slate-500 font-medium">
-          © 2026 CivicTrack. Empowering citizens everywhere.
+          {SITE_CONFIG.copyright}
         </div>
       </div>
 

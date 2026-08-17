@@ -1,6 +1,7 @@
 import React from 'react';
 import SignupForm from '../../features/auth/components/SignupForm';
 import { ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { SITE_CONFIG } from '../../constants/siteConfig';
 
 const Signup = () => {
   return (
@@ -31,19 +32,19 @@ const Signup = () => {
 
           <ul className="space-y-3 pt-2 text-sm text-slate-300 font-medium">
             <li className="flex items-center gap-3">
-              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Instant issue submission with photos
+              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Geotagged issue submission with photos
             </li>
             <li className="flex items-center gap-3">
-              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Direct connection to municipal authorities
+              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Transparent application status logs
             </li>
             <li className="flex items-center gap-3">
-              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Live resolution tracking & notifications
+              <CheckCircle2 className="w-4 h-4 text-blue-400" /> Live resolution tracking & updates
             </li>
           </ul>
         </div>
 
         <div className="relative z-10 text-xs text-slate-500 font-medium">
-          © 2026 CivicTrack. Empowering citizens everywhere.
+          {SITE_CONFIG.copyright}
         </div>
       </div>
 

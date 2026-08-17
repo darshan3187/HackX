@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
-import { heroContent } from '../../data/content';
+import { ShieldCheck, CheckCircle2, FileText } from 'lucide-react';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 
 const TrustIndicators = () => {
@@ -10,30 +9,21 @@ const TrustIndicators = () => {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="flex items-center gap-4 pt-4 border-t border-gray-100/80 max-w-md"
+      className="flex flex-wrap items-center gap-3 pt-4 border-t border-gray-100/80 max-w-lg text-xs font-semibold text-gray-600"
     >
-      {/* Overlapping User Avatars with staggered entrance */}
-      <div className="flex -space-x-2.5 overflow-hidden">
-        {heroContent.avatars.map((src, i) => (
-          <motion.img
-            key={i}
-            variants={fadeUp}
-            className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover"
-            src={src}
-            alt={`Active citizen user ${i + 1}`}
-          />
-        ))}
-      </div>
+      <motion.div variants={fadeUp} className="flex items-center gap-1.5 bg-blue-50/80 text-blue-700 px-3 py-1.5 rounded-xl border border-blue-100 font-bold">
+        <ShieldCheck className="w-4 h-4 text-blue-600" />
+        <span>Independent Civic Project</span>
+      </motion.div>
 
-      {/* Ratings & Citizen Counter */}
-      <motion.div variants={fadeUp} className="flex flex-col">
-        <div className="flex items-center gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-          ))}
-          <span className="text-sm font-bold text-gray-900 ml-1">{heroContent.ratingScore}</span>
-        </div>
-        <p className="text-xs text-gray-500 font-medium">{heroContent.ratingText}</p>
+      <motion.div variants={fadeUp} className="flex items-center gap-1.5 bg-emerald-50/80 text-emerald-700 px-3 py-1.5 rounded-xl border border-emerald-100 font-bold">
+        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+        <span>Open Issue Tracking</span>
+      </motion.div>
+
+      <motion.div variants={fadeUp} className="flex items-center gap-1.5 bg-purple-50/80 text-purple-700 px-3 py-1.5 rounded-xl border border-purple-100 font-bold">
+        <FileText className="w-4 h-4 text-purple-600" />
+        <span>Photo Proof Support</span>
       </motion.div>
     </motion.div>
   );

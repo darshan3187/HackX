@@ -1,7 +1,8 @@
 import React from 'react';
-import { ShieldCheck, Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { ShieldCheck, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { footerData } from '../../data/content';
+import { SITE_CONFIG } from '../../constants/siteConfig';
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gray-100">
           
           {/* Logo & Tagline Column */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-6 space-y-4">
             <Link to="/" className="flex items-center gap-2.5">
               <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-blue-500/20">
                 <ShieldCheck className="w-5 h-5" />
@@ -20,9 +21,17 @@ const Footer = () => {
               <span className="text-xl font-black text-gray-900 tracking-tight">CivicTrack</span>
             </Link>
 
-            <p className="text-sm text-gray-500 max-w-sm font-medium leading-relaxed">
+            <p className="text-sm text-gray-500 max-w-md font-medium leading-relaxed">
               {footerData.tagline}
             </p>
+
+            <div className="pt-2 text-xs text-gray-500 font-medium flex items-center gap-2">
+              <Mail className="w-4 h-4 text-blue-600" />
+              <span>Contact Developer: </span>
+              <a href={`mailto:${SITE_CONFIG.contactEmail}`} className="text-blue-600 font-bold hover:underline">
+                {SITE_CONFIG.contactEmail}
+              </a>
+            </div>
           </div>
 
           {/* Quick Links Column */}
@@ -38,8 +47,8 @@ const Footer = () => {
           </div>
 
           {/* Resources Column */}
-          <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">Resources</h4>
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">Topic Resources</h4>
             <ul className="space-y-2 text-xs font-medium text-gray-500">
               {footerData.resources.map((res, idx) => (
                 <li key={idx}>
@@ -49,30 +58,16 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Icons Column */}
-          <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">Follow Us</h4>
-            <div className="flex items-center gap-3 text-gray-600">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on X (Twitter)" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on Facebook" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on Instagram" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on LinkedIn" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="pt-8 text-center text-xs font-medium text-gray-400">
-          {footerData.copyright}
+        {/* Disclaimer & Copyright */}
+        <div className="pt-8 space-y-4 text-center">
+          <p className="text-[11px] text-gray-400 font-medium max-w-4xl mx-auto leading-relaxed">
+            {footerData.disclaimer}
+          </p>
+          <div className="text-xs font-bold text-gray-400">
+            {footerData.copyright}
+          </div>
         </div>
 
       </div>
