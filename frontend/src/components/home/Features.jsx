@@ -71,7 +71,7 @@ const Features = () => {
 
                 <div className="pt-6">
                   <Link
-                    to="/dashboard"
+                    to="/features"
                     className={`inline-flex items-center text-xs font-semibold text-slate-300 ${config.hoverText} transition-colors gap-1.5`}
                   >
                     {item.linkText} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

@@ -31,11 +31,7 @@ const Footer = () => {
             <ul className="space-y-2 text-xs font-medium text-gray-500">
               {footerData.quickLinks.map((link, idx) => (
                 <li key={idx}>
-                  {link.href.startsWith('/') ? (
-                    <Link to={link.href} className="hover:text-blue-600 transition-colors">{link.name}</Link>
-                  ) : (
-                    <a href={link.href} className="hover:text-blue-600 transition-colors">{link.name}</a>
-                  )}
+                  <Link to={link.href} className="hover:text-blue-600 transition-colors">{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -47,7 +43,7 @@ const Footer = () => {
             <ul className="space-y-2 text-xs font-medium text-gray-500">
               {footerData.resources.map((res, idx) => (
                 <li key={idx}>
-                  <a href={res.href} className="hover:text-blue-600 transition-colors">{res.name}</a>
+                  <Link to={res.href} className="hover:text-blue-600 transition-colors">{res.name}</Link>
                 </li>
               ))}
             </ul>
@@ -57,16 +53,16 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">Follow Us</h4>
             <div className="flex items-center gap-3 text-gray-600">
-              <a href="#" aria-label="Follow CivicTrack on X (Twitter)" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on X (Twitter)" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="Follow CivicTrack on Facebook" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on Facebook" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="Follow CivicTrack on Instagram" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on Instagram" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="Follow CivicTrack on LinkedIn" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Follow CivicTrack on LinkedIn" className="hover:text-blue-600 transition-colors p-1.5 rounded-lg hover:bg-gray-50">
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>

@@ -143,18 +143,18 @@ export const ctaContent = {
 export const footerData = {
   tagline: "Empowering citizens. Building better communities.",
   quickLinks: [
-    { name: "Home", href: "#" },
-    { name: "Features", href: "#features" },
-    { name: "How It Works", href: "#how-it-works" },
+    { name: "Home", href: "/" },
+    { name: "Features", href: "/features" },
+    { name: "How It Works", href: "/how-it-works" },
     { name: "Dashboard", href: "/dashboard" },
-    { name: "About Us", href: "#about" },
-    { name: "Blog", href: "#blog" },
+    { name: "About Us", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ],
   resources: [
-    { name: "Help Center", href: "#" },
-    { name: "FAQs", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
+    { name: "Features", href: "/features" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "Contact Support", href: "/contact" },
   ],
   copyright: "© 2026 CivicTrack. All rights reserved.",
 };
