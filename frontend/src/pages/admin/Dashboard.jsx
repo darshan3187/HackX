@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
-import AdminStatsCards from '../../features/dashboard/components/AdminStatsCards';
-import AdminCharts from '../../features/dashboard/components/AdminCharts';
-import AdminComplaintsTable from '../../features/complaints/components/AdminComplaintsTable';
+import AdminStatsCards from '../../components/dashboard/AdminStatsCards';
+import AdminCharts from '../../components/dashboard/AdminCharts';
+import AdminComplaintsTable from '../../components/dashboard/AdminComplaintsTable';
 import { complaintService } from '../../services/complaints';
 import PageHeader from '../../components/ui/PageHeader';
 import Button from '../../components/ui/Button';

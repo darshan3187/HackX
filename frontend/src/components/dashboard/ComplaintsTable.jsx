@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import { API_BASE_URL } from '../../../services/api';
-import { complaintService } from '../../../services/complaints';
-import { formatDate } from '../../../utils/date';
-import StatusBadge from '../../../components/ui/StatusBadge';
-import { TableSkeleton } from '../../../components/ui/SkeletonLoader';
+import { API_BASE_URL } from '../../services/api';
+import { complaintService } from '../../services/complaints';
+import { formatDate } from '../../utils/date';
+import StatusBadge from '../ui/StatusBadge';
+import { TableSkeleton } from '../ui/SkeletonLoader';
 
 const ComplaintsTable = () => {
   const navigate = useNavigate();

@@ -6,8 +6,8 @@ import {
   Mail
 } from 'lucide-react';
 import { jwtDecode } from 'jwt-decode';
-import StatsCards from '../../features/dashboard/components/StatsCards';
-import ComplaintsTable from '../../features/dashboard/components/ComplaintsTable';
+import StatsCards from '../../components/dashboard/StatsCards';
+import ComplaintsTable from '../../components/dashboard/ComplaintsTable';
 import { SITE_CONFIG } from '../../constants/siteConfig';
 
 const Dashboard = () => {

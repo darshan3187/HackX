@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { User, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import API from '../../../services/api';
+import API from '../../services/api';
 import { jwtDecode } from 'jwt-decode';
-import Button from '../../../components/ui/Button';
+import Button from '../ui/Button';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Clock, CheckCircle2, AlertCircle } from "lucide-react";
-import { complaintService } from '../../../services/complaints';
+import { complaintService } from '../../services/complaints';
 
 const StatsCards = () => {
   const [complaints, setComplaints] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Footer from './Footer';
-import UserSidebar from '../features/dashboard/components/UserSidebar';
+import UserSidebar from './UserSidebar';
 import { Outlet, Link } from 'react-router-dom';
 import { X, Menu, ShieldCheck } from 'lucide-react';
 

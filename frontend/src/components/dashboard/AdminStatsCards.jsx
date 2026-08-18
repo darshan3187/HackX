@@ -1,6 +1,6 @@
 import React from "react";
 import { FileText, Clock, TrendingUp, CheckCircle2 } from "lucide-react";
-import Card from "../../../components/ui/Card";
+import Card from "../ui/Card";
 
 const AdminStatsCards = ({ complaints = [] }) => {
   const stats = [

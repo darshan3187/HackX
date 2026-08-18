@@ -7,7 +7,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { jwtDecode } from "jwt-decode";
-import { SITE_CONFIG } from '../../../constants/siteConfig';
+import { SITE_CONFIG } from '../constants/siteConfig';
 
 const UserSidebar = ({ closeMobileMenu }) => {
   const [user] = useState(() => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ShieldCheck } from 'lucide-react';
-import { logoVariants, overlayVariants } from '../../animations/pageTransitions';
+import { logoVariants, overlayVariants } from '../../animations/variants';
 
 const PageTransitionLoader = () => {
   const location = useLocation();

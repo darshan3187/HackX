@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
-import AdminSidebar from '../features/dashboard/components/AdminSidebar';
+import AdminSidebar from './AdminSidebar';
 import { Outlet } from 'react-router-dom';
 import { X, Search, ShieldCheck } from 'lucide-react';
 

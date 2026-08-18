@@ -6,7 +6,7 @@ import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
 import UserLayout from './layouts/UserLayout';
 import PageTransitionLoader from './components/layout/PageTransitionLoader';
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./layouts/PrivateRoute";
 
 const Home = lazy(() => import('./pages/public/Home'));
 const Login = lazy(() => import('./pages/public/Login'));
@@ -18,7 +18,6 @@ const ContactPage = lazy(() => import('./pages/public/ContactPage'));
 const InsightsPage = lazy(() => import('./pages/public/InsightsPage'));
 const InsightsCategoryPage = lazy(() => import('./pages/public/InsightsCategoryPage'));
 const ArticleDetailPage = lazy(() => import('./pages/public/ArticleDetailPage'));
-const BlogPage = lazy(() => import('./pages/public/BlogPage'));
 const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage'));
 
 const Dashboard = lazy(() => import('./pages/user/Dashboard'));
@@ -66,7 +65,7 @@ function App() {
             <Route path="insights" element={<InsightsPage />} />
             <Route path="insights/category/:categorySlug" element={<InsightsCategoryPage />} />
             <Route path="insights/:slug" element={<ArticleDetailPage />} />
-            <Route path="blog" element={<BlogPage />} />
+            <Route path="blog" element={<InsightsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
 

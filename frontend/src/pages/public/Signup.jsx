@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupForm from '../../features/auth/components/SignupForm';
+import SignupForm from '../../components/auth/SignupForm';
 import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { SITE_CONFIG } from '../../constants/siteConfig';
 

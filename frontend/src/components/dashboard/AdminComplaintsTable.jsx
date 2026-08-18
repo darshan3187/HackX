@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import StatusBadge from "../../../components/ui/StatusBadge";
-import EmptyState from "../../../components/ui/EmptyState";
-import { API_BASE_URL } from "../../../services/api";
+import StatusBadge from "../ui/StatusBadge";
+import EmptyState from "../ui/EmptyState";
+import { API_BASE_URL } from "../../services/api";
 
 const AdminComplaintsTable = ({ complaints = [] }) => {
   const navigate = useNavigate();

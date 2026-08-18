@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import API from '../../../services/api';
-import Button from '../../../components/ui/Button';
+import API from '../../services/api';
+import Button from '../ui/Button';
 
 const SignupForm = () => {
   const navigate = useNavigate();

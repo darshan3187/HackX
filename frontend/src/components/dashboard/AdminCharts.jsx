@@ -14,7 +14,7 @@ import {
    Legend,
    CartesianGrid,
 } from "recharts";
-import Card from "../../../components/ui/Card";
+import Card from "../ui/Card";
 
 const COLORS = ["#2563EB", "#16A34A", "#9333EA", "#F59E0B", "#EF4444"];
 
